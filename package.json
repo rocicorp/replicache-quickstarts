@@ -1,0 +1,63 @@
+{
+  "name": "replicache-examples",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "replicache": ">=11.2.1",
+    "replicache-express": "^0.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.50",
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "ts-node": "^10.9.1",
+    "typescript": "4.7.4"
+  },
+  "scripts": {
+    "format": "prettier --write './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}' './**/src/*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
+    "postinstall": "cd ./react/ && npm install",
+    "build": "run-p build:*",
+    "build:server": "rm -rf lib && tsc",
+    "build:react": "cd ./react/ && rm -rf lib && rm -rf dist && npm run build",
+    "typecheck": "tsc -b",
+    "tsc-version": "tsc -v",
+    "dev:react": "cd ./react && npm run dev",
+    "dev:server": "nodemon",
+    "watch:react": "concurrently --kill-others 'npm run dev:server' 'npm run typecheck -- --watch' 'npm run dev:react'",
+    "clean:dist": "rm -rf ./dist && mkdir -p ./dist",
+    "prod:react": "npm run clean:dist && cp -r ./react/dist/* ./dist/ && NODE_ENV=production node --loader ts-node/esm --experimental-specifier-resolution=node ./src/server.ts"
+  },
+  "type": "module",
+  "eslintConfig": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ],
+      "strict": [
+        2,
+        "never"
+      ],
+      "react/jsx-uses-react": 2,
+      "react/jsx-uses-vars": 2,
+      "react/react-in-jsx-scope": 2
+    },
+    "plugins": [
+      "react"
+    ]
+  }
+}
