@@ -15,7 +15,7 @@ This library holds various examples of replicache integrated within various popu
 
 ## solid
 
-## svelete
+## svelte
 
 ## vanilla js
 
