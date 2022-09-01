@@ -6,7 +6,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "replicache": ">=11.2.1",
-    "replicache-express": "^0.1.1"
+    "replicache-express": "^0.1.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
@@ -19,18 +19,22 @@
     "typescript": "4.7.4"
   },
   "scripts": {
-    "format": "prettier --write './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}' './**/src/*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
-    "postinstall": "cd ./react/ && npm install",
-    "build": "run-p build:*",
+    "format": "prettier --write './**/src/*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
+    "postinstall": "cd ./react/ && npm install && cd ../ts-web-component && npm install",
+    "build": "run-p build:*", 
     "build:server": "rm -rf lib && tsc",
     "build:react": "cd ./react/ && rm -rf lib && rm -rf dist && npm run build",
+    "build:ts-web-component": "cd ./ts-web-component/ && rm -rf lib && rm -rf dist && npm run build",
     "typecheck": "tsc -b",
     "tsc-version": "tsc -v",
     "dev:react": "cd ./react && npm run dev",
+    "dev:ts-web-component": "cd ./ts-web-component && npm run dev",
     "dev:server": "nodemon",
     "watch:react": "concurrently --kill-others 'npm run dev:server' 'npm run typecheck -- --watch' 'npm run dev:react'",
+    "watch:ts-web-component": "concurrently --kill-others 'npm run dev:server' 'npm run typecheck -- --watch' 'npm run dev:ts-web-component'",
     "clean:dist": "rm -rf ./dist && mkdir -p ./dist",
-    "prod:react": "npm run clean:dist && cp -r ./react/dist/* ./dist/ && NODE_ENV=production node --loader ts-node/esm --experimental-specifier-resolution=node ./src/server.ts"
+    "prod:react": "npm run clean:dist && cp -r ./react/dist/* ./dist/ && NODE_ENV=production node --loader ts-node/esm --experimental-specifier-resolution=node ./server/src/server.ts",
+    "prod:ts-web-component": "npm run clean:dist && cp -r ./ts-web-component/dist/* ./dist/ && NODE_ENV=production node --loader ts-node/esm --experimental-specifier-resolution=node ./server/src/server.ts"
   },
   "type": "module",
   "eslintConfig": {
