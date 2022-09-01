@@ -13,7 +13,6 @@ let spaceIDUrlParam =
   paths.indexOf("listID") > -1 ? paths[paths.indexOf("listID") + 1] : "";
 let spaceID = "";
 if (spaceIDUrlParam) {
-  console.log("!!!!!", await spaceExists(spaceIDUrlParam));
   spaceID = (await spaceExists(spaceIDUrlParam))
     ? spaceIDUrlParam
     : await createSpace(spaceIDUrlParam);

@@ -1,7 +1,7 @@
 import "dotenv/config";
 import path from "path";
 import { ReplicacheExpressServer } from "replicache-express";
-import { mutators } from "../shared/mutators";
+import { mutators } from "../../shared/mutators";
 import { fileURLToPath } from "url";
 import express from "express";
 import fs from "fs";
@@ -14,7 +14,7 @@ const options = {
   host: process.env.HOST || "localhost",
 };
 
-const default_dist = path.join(__dirname, "../dist");
+const default_dist = path.join(__dirname, "../../dist");
 
 if (process.env.NODE_ENV === "production") {
   const r = new ReplicacheExpressServer(options);
