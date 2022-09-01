@@ -10,18 +10,11 @@
     "format": "prettier --write './src/*/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'"
   },
   "dependencies": {
-    "classnames": "^2.3.1",
     "nanoid": "^4.0.0",
-    "qs": "^6.11.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "replicache": ">=11.2.1",
     "replicache-react": "^2.9.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.0.1",
     "prettier": "^2.2.1",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"
@@ -44,14 +37,9 @@
       "strict": [
         2,
         "never"
-      ],
-      "react/jsx-uses-react": 2,
-      "react/jsx-uses-vars": 2,
-      "react/react-in-jsx-scope": 2
+      ]
     },
-    "plugins": [
-      "react"
-    ]
+    "plugins": []
   },
   "prettier": {
     "singleQuote": false,
