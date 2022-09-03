@@ -26,7 +26,7 @@ $ export VITE_REPLICACHE_LICENSE_KEY="<your license key>"
 $ npm install; npm run build;
 ```
 
-## 2. Start the Replicache-Express server backend
+## 2. Start the `replicache-express` server backend
 
 ```bash
 $ npm run dev:server
