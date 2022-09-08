@@ -302,6 +302,7 @@ body {
 }
 
 .filters li a {
+  cursor: pointer;
   color: inherit;
   margin: 3px;
   padding: 3px 7px;

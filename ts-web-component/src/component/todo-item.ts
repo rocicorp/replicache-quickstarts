@@ -1,4 +1,5 @@
 import type { TodoUpdate } from "../../../shared/todo";
+import { assert } from "../assert";
 
 const templateTodoItem = document.createElement("template");
 templateTodoItem.innerHTML = `
@@ -11,35 +12,37 @@ templateTodoItem.innerHTML = `
 </li>
 `;
 
-export default class TodoItem extends HTMLElement {
-  private _completed: boolean;
-  private _text: string;
-  private _todoID!: string;
-  item: Element | null | undefined;
-  removeButton: Element | null | undefined;
-  text!: HTMLLabelElement | null;
-  checkbox: HTMLInputElement | null | undefined;
-  constructor() {
-    super();
-    this._completed = false;
-    this._text = "";
-  }
+export interface TodoItemEventHandlers {
+  // This is not really correct but good enough for now.
+  addEventListener<T>(
+    type: string,
+    listener: (e: CustomEvent<T>) => void
+  ): void;
+}
+
+export class TodoItem extends HTMLElement {
+  static observedAttributes = ["text", "completed"];
+
+  private _todoID = "";
+  private _item: Element | null = null;
+  private _textElement: HTMLLabelElement | null = null;
+  private _checkbox: HTMLInputElement | null = null;
 
   connectedCallback() {
     this.appendChild(templateTodoItem.content.cloneNode(true));
-    this.item = this.querySelector(".item");
-    this.removeButton = this.querySelector(".destroy");
-    this.text = this.querySelector("label");
-    this.checkbox = this.querySelector("input");
-    this.removeButton?.addEventListener("click", (e: Event) => {
-      e.preventDefault();
+    this._item = this.querySelector(".item");
+    const removeButton = this.querySelector(".destroy");
+    this._textElement = this.querySelector("label");
+    this._checkbox = this.querySelector("input");
+    assert(removeButton);
+    removeButton.addEventListener("click", (e: Event) => {
       this.dispatchEvent(new CustomEvent("onRemove", { detail: this._todoID }));
     });
-    this.checkbox?.addEventListener("click", (e: Event) => {
-      e.preventDefault();
+    assert(this._checkbox);
+    this._checkbox.addEventListener("click", (e: Event) => {
       this.dispatchEvent(
         new CustomEvent<TodoUpdate>("onToggle", {
-          detail: { id: this._todoID, completed: !this._completed },
+          detail: { id: this._todoID, completed: !this.completed },
         })
       );
     });
@@ -54,31 +57,44 @@ export default class TodoItem extends HTMLElement {
     return this._todoID;
   }
 
+  get text() {
+    return this.getAttribute("text") ?? "";
+  }
+
+  set text(v: string) {
+    this.setAttribute("text", v);
+  }
+
+  get completed() {
+    return this.hasAttribute("completed");
+  }
+
+  set completed(v: boolean) {
+    if (v) {
+      this.setAttribute("completed", "");
+    } else {
+      this.removeAttribute("completed");
+    }
+  }
+
   disconnectedCallback() {}
 
-  static get observedAttributes() {
-    return ["text", "checked"];
+  attributeChangedCallback(name: any, oldValue: any, newValue: string) {
+    this._render();
   }
 
-  attributeChangedCallback(_name: any, _oldValue: any, newValue: string) {
-    if (_name === "text") {
-      this._text = newValue;
-    } else if (_name === "checked") {
-      this._completed = newValue === "true";
-    }
-  }
+  private _render() {
+    const { text, completed } = this;
 
-  _render() {
-    if (!this.item) return;
-    if (this.text) {
-      this.text.textContent = this._text;
+    if (this._textElement) {
+      this._textElement.textContent = text;
     }
-    if (this._completed) {
-      this.item.classList.add("completed");
-      this.checkbox?.setAttribute("checked", "");
-    } else {
-      this.item.classList.remove("completed");
-      this.checkbox?.removeAttribute("checked");
+
+    if (this._checkbox) {
+      this._checkbox.checked = completed;
+    }
+    if (this._item) {
+      this._item.classList.toggle("completed", completed);
     }
   }
 }
