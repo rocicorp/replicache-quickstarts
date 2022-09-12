@@ -1,5 +1,5 @@
-import MyTodo from "./component/my-todo";
-import TodoItem from "./component/todo-item";
+import { MyTodo } from "./component/my-todo";
+import { TodoItem } from "./component/todo-item";
 import "./style.css";
 
 window.customElements.define("my-todo", MyTodo);

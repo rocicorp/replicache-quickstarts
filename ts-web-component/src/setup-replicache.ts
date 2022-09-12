@@ -3,6 +3,7 @@ import { createSpace, spaceExists } from "./space";
 import { mutators } from "../../shared/mutators";
 import { Replicache } from "replicache";
 import type { M } from "../../shared/mutators";
+import { assert } from "./assert";
 
 export async function setupReplicache(): Promise<Replicache<M>> {
   const { pathname } = window.location;
@@ -24,10 +25,12 @@ export async function setupReplicache(): Promise<Replicache<M>> {
     window.location.href = "/listId/" + listId;
   }
 
+  // See https://doc.replicache.dev/licensing for how to get a license key.
+  const licenseKey = import.meta.env.VITE_REPLICACHE_LICENSE_KEY;
+  assert(licenseKey, "Missing VITE_REPLICACHE_LICENSE_KEY");
+
   const r = new Replicache<M>({
-    // See https://doc.replicache.dev/licensing for how to get a license key.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    licenseKey: import.meta.env.VITE_REPLICACHE_LICENSE_KEY!,
+    licenseKey,
     pushURL: `/api/replicache/push?spaceID=${listId}`,
     pullURL: `/api/replicache/pull?spaceID=${listId}`,
     name: listId,
@@ -36,7 +39,7 @@ export async function setupReplicache(): Promise<Replicache<M>> {
 
   const pokeReceiver = getPokeReceiver();
   pokeReceiver(listId, async () => {
-    await r.pull();
+    r.pull();
   });
 
   return r;
