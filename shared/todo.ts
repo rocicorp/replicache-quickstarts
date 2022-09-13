@@ -2,7 +2,7 @@
 // function to get all Todos. You'd typically have one of these files for each
 // domain object in your application.
 
-import  type { ReadTransaction } from "replicache";
+import type { ReadTransaction } from "replicache";
 
 export type Todo = {
   id: string;

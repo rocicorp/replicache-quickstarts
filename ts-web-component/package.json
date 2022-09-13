@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run lint && tsc && vite build",
     "preview": "vite preview",
-    "format": "prettier --write './src/*/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'"
+    "format": "prettier --write './**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
+    "check-format": "prettier --check './**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'"
   },
   "dependencies": {
     "nanoid": "^4.0.0",
@@ -15,31 +17,13 @@
     "replicache-react": "^2.9.0"
   },
   "devDependencies": {
+    "@rocicorp/eslint-config": "^0.1.1",
     "prettier": "^2.2.1",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"
   },
   "eslintConfig": {
-    "ecmaFeatures": {
-      "jsx": true,
-      "modules": true
-    },
-    "env": {
-      "browser": true,
-      "node": true
-    },
-    "parser": "babel-eslint",
-    "rules": {
-      "quotes": [
-        2,
-        "single"
-      ],
-      "strict": [
-        2,
-        "never"
-      ]
-    },
-    "plugins": []
+    "extends": "@rocicorp/eslint-config"
   },
   "prettier": {
     "singleQuote": false,

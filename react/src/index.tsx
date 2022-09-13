@@ -9,7 +9,7 @@ import { createSpace, spaceExists } from "./space";
 
 const { pathname } = window.location;
 const paths = pathname.split("/");
-let spaceIDUrlParam =
+const spaceIDUrlParam =
   paths.indexOf("listID") > -1 ? paths[paths.indexOf("listID") + 1] : "";
 let spaceID = "";
 if (spaceIDUrlParam) {
