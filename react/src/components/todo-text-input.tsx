@@ -32,7 +32,7 @@ export default function TodoTextInput({
     setTextInput(e.target.value);
   };
 
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (_e: FocusEvent<HTMLInputElement>) => {
     if (onBlur) {
       onBlur(textInput);
     }
@@ -43,7 +43,7 @@ export default function TodoTextInput({
       ref={ref}
       className={classnames({
         edit: initial !== "",
-        "new-todo": initial == "",
+        "new-todo": initial === "",
       })}
       type="text"
       placeholder={placeholder}

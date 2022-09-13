@@ -28,15 +28,15 @@ const App = ({ rep }: { rep: Replicache<M> }) => {
   const handleUpdateTodo = (update: TodoUpdate) =>
     rep.mutate.updateTodo(update);
 
-  const handleDeleteTodos = (ids: string[]) => {
+  const handleDeleteTodos = async (ids: string[]) => {
     for (const id of ids) {
-      rep.mutate.deleteTodo(id);
+      await rep.mutate.deleteTodo(id);
     }
   };
 
-  const handleCompleteTodos = (completed: boolean, ids: string[]) => {
+  const handleCompleteTodos = async (completed: boolean, ids: string[]) => {
     for (const id of ids) {
-      rep.mutate.updateTodo({
+      await rep.mutate.updateTodo({
         id,
         completed,
       });

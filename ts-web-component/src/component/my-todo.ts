@@ -117,8 +117,8 @@ export class MyTodo extends HTMLElement {
     });
   }
 
-  disconnectedCallback() {
-    this._r?.close();
+  async disconnectedCallback() {
+    await this._r?.close();
   }
 
   private _render() {
@@ -127,7 +127,7 @@ export class MyTodo extends HTMLElement {
     this._itemCount.textContent = `${this._list.length}`;
     this._listContainer.textContent = "";
     for (const todo of this._filteredList) {
-      let item = new TodoItem() as TodoItem & TodoItemEventHandlers;
+      const item = new TodoItem() as TodoItem & TodoItemEventHandlers;
       item.text = todo.text;
       item.completed = todo.completed;
       item.todoID = todo.id;

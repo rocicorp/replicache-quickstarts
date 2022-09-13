@@ -35,11 +35,11 @@ export class TodoItem extends HTMLElement {
     this._textElement = this.querySelector("label");
     this._checkbox = this.querySelector("input");
     assert(removeButton);
-    removeButton.addEventListener("click", (e: Event) => {
+    removeButton.addEventListener("click", (_e: Event) => {
       this.dispatchEvent(new CustomEvent("onRemove", { detail: this._todoID }));
     });
     assert(this._checkbox);
-    this._checkbox.addEventListener("click", (e: Event) => {
+    this._checkbox.addEventListener("click", (_e: Event) => {
       this.dispatchEvent(
         new CustomEvent<TodoUpdate>("onToggle", {
           detail: { id: this._todoID, completed: !this.completed },
@@ -77,9 +77,7 @@ export class TodoItem extends HTMLElement {
     }
   }
 
-  disconnectedCallback() {}
-
-  attributeChangedCallback(name: any, oldValue: any, newValue: string) {
+  attributeChangedCallback() {
     this._render();
   }
 
