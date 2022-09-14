@@ -2,23 +2,23 @@
 
 # replicache-examples
 
-This repository contains demos and sample code for [Replicache](https://replicache.dev/). There are multiple option to run various frontend framework with a common express server backend. The backend utilizes the [replicache-express](https://github.com/rocicorp/replicache-express) library which implements the `push`, `pull`, `poke`, `createSpace`, and `spaceExists` handlers required for Replicache sync protocol. The intention for this library is to help developers easily experiment with various frontend frameworks integrated with Replicache.
+This repository contains demos and sample code for [Replicache](https://replicache.dev/). There are multiple option to run various frontend framework with a common express server backend. The backend utilizes the [replicache-express](https://github.com/rocicorp/replicache-express) library which implements the `push`, `pull`, `poke`, `createSpace`, and `spaceExists` handlers required for Replicache sync protocol. This library intends to help developers easily experiment with various frontend frameworks integrated with Replicache.
 
 ## 1. Setup
 
-### Get your Replicache License Key
+#### Get your Replicache License Key
 
 ```bash
 $ npx replicache get-license
 ```
 
-### Set your `VITE_REPLICACHE_LICENSE_KEY` environment variable
+#### Set your `VITE_REPLICACHE_LICENSE_KEY` environment variable
 
 ```bash
 $ export VITE_REPLICACHE_LICENSE_KEY="<your license key>"
 ```
 
-### Install and Build
+#### Install and Build
 
 ```bash
 $ npm install; npm run build;
@@ -55,6 +55,23 @@ The server can serve the output of the various frameworks and be run as a static
 ```bash
 $ npm run prod:<front end framework>
 ```
+
+## Deploying to Render
+
+A render blueprint example is provided to deploy the application.
+
+```bash
+$ cp render.yaml.example render.yaml
+```
+
+Open the YAML file and modify the following lines to the appropriate framework
+
+```
+name: replicache-examples-<framework>-todo # change e.g. (replicache-examples-react-todo)
+startCommand: "npm run prod:<framework>" # change e.g. (npm run prod:react)
+```
+
+Commit the changes and follow the direction on [Deploying to Render](https://doc.replicache.dev/deploy-render)
 
 ## Upcoming Frameworks
 
