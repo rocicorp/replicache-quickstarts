@@ -42,5 +42,9 @@
   "type": "module",
   "eslintConfig": {
     "extends": "@rocicorp/eslint-config"
+  },
+  "engines": {
+    "node": ">=16.15.0",
+    "npm": ">=7.0.0"
   }
 }
