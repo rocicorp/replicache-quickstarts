@@ -5,7 +5,6 @@ export default defineConfig({
   plugins: [],
   build: {
     target: "esnext",
-    minify: false,
   },
   server: {
     proxy: {
