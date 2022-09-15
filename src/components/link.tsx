@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import classnames from "classnames";
 
 const Link = ({
@@ -6,7 +6,7 @@ const Link = ({
   selected,
   onClick,
 }: {
-  children: any;
+  children: ReactNode;
   selected: boolean;
   onClick: () => void;
 }) => {

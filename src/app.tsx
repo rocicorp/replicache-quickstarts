@@ -1,42 +1,42 @@
 import { nanoid } from "nanoid";
 import React from "react";
-import { Replicache } from "replicache";
+import { Reflect } from "@rocicorp/reflect";
 import { useSubscribe } from "replicache-react";
 
-import { M } from "../../shared/mutators";
-import { listTodos, TodoUpdate } from "../../shared/todo";
+import { M } from "./mutators";
+import { listTodos, TodoUpdate } from "./todo";
 
 import Header from "./components/header";
 import MainSection from "./components/main-section";
 
 // This is the top-level component for our app.
-const App = ({ rep }: { rep: Replicache<M> }) => {
+const App = ({ reflect }: { reflect: Reflect<M> }) => {
   // Subscribe to all todos and sort them.
-  const todos = useSubscribe(rep, listTodos, [], [rep]);
+  const todos = useSubscribe(reflect, listTodos, [], [reflect]);
   todos.sort((a, b) => a.sort - b.sort);
 
   // Define event handlers and connect them to Replicache mutators. Each
   // of these mutators runs immediately (optimistically) locally, then runs
   // again on the server-side automatically.
   const handleNewItem = (text: string) =>
-    rep.mutate.createTodo({
+    reflect.mutate.createTodo({
       id: nanoid(),
       text,
       completed: false,
     });
 
   const handleUpdateTodo = (update: TodoUpdate) =>
-    rep.mutate.updateTodo(update);
+    reflect.mutate.updateTodo(update);
 
   const handleDeleteTodos = async (ids: string[]) => {
     for (const id of ids) {
-      await rep.mutate.deleteTodo(id);
+      await reflect.mutate.deleteTodo(id);
     }
   };
 
   const handleCompleteTodos = async (completed: boolean, ids: string[]) => {
     for (const id of ids) {
-      await rep.mutate.updateTodo({
+      await reflect.mutate.updateTodo({
         id,
         completed,
       });

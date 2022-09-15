@@ -11,12 +11,13 @@
     "format": "prettier --write './src/*/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'"
   },
   "dependencies": {
+    "@rocicorp/reflect": "^0.7.0",
+    "@rocicorp/reflect-server": "^0.14.0",
     "classnames": "^2.3.1",
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "replicache": ">=11.2.1",
-    "replicache-react": "^2.9.0",
+    "replicache-react": "^2.6.0",
     "todomvc-app-css": "^2.4.2"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
+    "nanoid": "^4.0.0",
     "prettier": "^2.2.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.7"

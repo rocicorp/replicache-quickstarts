@@ -2,45 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./app";
-import { mutators } from "../../shared/mutators";
-import { Replicache } from "replicache";
-import { getPokeReceiver } from "./poke";
-import { createSpace, spaceExists } from "./space";
+import { mutators } from "./mutators";
+import { Reflect } from "@rocicorp/reflect";
+import { nanoid } from "nanoid";
 
-const { pathname } = window.location;
-const paths = pathname.split("/");
-const spaceIDUrlParam =
-  paths.indexOf("listID") > -1 ? paths[paths.indexOf("listID") + 1] : "";
-let spaceID = "";
-if (spaceIDUrlParam) {
-  spaceID = (await spaceExists(spaceIDUrlParam))
-    ? spaceIDUrlParam
-    : await createSpace(spaceIDUrlParam);
-} else {
-  spaceID = await createSpace();
-}
+const userID = nanoid();
+const roomID = "s1";
+const socketOrigin = "ws://localhost:8787";
+//("wss://reflect-todo.replicache.workers.dev");
 
-if (spaceIDUrlParam !== spaceID) {
-  window.location.href = "/listID/" + spaceID;
-}
-
-const r = new Replicache({
-  // See https://doc.replicache.dev/licensing for how to get a license key.
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  licenseKey: import.meta.env.VITE_REPLICACHE_LICENSE_KEY!,
-  pushURL: `/api/replicache/push?spaceID=${spaceID}`,
-  pullURL: `/api/replicache/pull?spaceID=${spaceID}`,
-  name: spaceID,
+const r = new Reflect({
+  socketOrigin,
+  userID,
+  roomID,
+  auth: userID,
   mutators,
-});
-
-const pokeReceiver = getPokeReceiver();
-pokeReceiver(spaceID, async () => {
-  await r.pull();
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <App rep={r} />
+    <App reflect={r} />
   </React.StrictMode>
 );

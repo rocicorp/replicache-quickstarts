@@ -1,0 +1,13 @@
+name = "reflect-todo"
+main = "worker/index.ts"
+compatibility_date = "2022-06-03"
+
+
+[durable_objects]
+bindings = [
+  { name = "roomDO", class_name = "RoomDO" },
+  { name = "authDO", class_name = "AuthDO" }
+]
+
+[triggers]
+crons = [ "*/5 * * * *" ] # ever 5 mins for AuthDO connection revalidation
