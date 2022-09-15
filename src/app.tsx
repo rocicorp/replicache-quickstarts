@@ -23,6 +23,7 @@ const App = ({ reflect }: { reflect: Reflect<M> }) => {
       id: nanoid(),
       text,
       completed: false,
+      sort: todos.length,
     });
 
   const handleUpdateTodo = (update: TodoUpdate) =>

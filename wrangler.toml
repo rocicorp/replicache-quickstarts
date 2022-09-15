@@ -9,5 +9,9 @@ bindings = [
   { name = "authDO", class_name = "AuthDO" }
 ]
 
+[[migrations]]
+tag = "v1" # Should be unique for each entry
+new_classes = ["RoomDO", "AuthDO"]
+
 [triggers]
 crons = [ "*/5 * * * *" ] # ever 5 mins for AuthDO connection revalidation

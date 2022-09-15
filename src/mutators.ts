@@ -26,7 +26,7 @@
 // required to get up and running.
 
 import type { WriteTransaction } from "@rocicorp/reflect";
-import { Todo, listTodos, TodoUpdate } from "./todo";
+import { Todo, TodoUpdate } from "./todo";
 
 export type M = typeof mutators;
 
@@ -44,20 +44,12 @@ export const mutators = {
     await tx.del(id);
   },
 
-  // This mutator creates a new todo, assigning the next available sort value.
-  //
-  // If two clients create new todos concurrently, they both might choose the
-  // same sort value locally (optimistically). That's fine because later when
-  // the mutator re-runs on the server the two todos will get unique values.
-  //
-  // Replicache will automatically sync the change back to the clients,
-  // reconcile any changes that happened client-side in the meantime, and update
-  // the UI to reflect the changes.
-  createTodo: async (tx: WriteTransaction, todo: Omit<Todo, "sort">) => {
-    const todos = await listTodos(tx);
-    todos.sort((t1, t2) => t1.sort - t2.sort);
+  createTodo: async (tx: WriteTransaction, todo: Todo) => {
+    await tx.put(todo.id, todo);
+  },
 
-    const maxSort = todos.pop()?.sort ?? 0;
-    await tx.put(todo.id, { ...todo, sort: maxSort + 1 });
+  init: async () => {
+    // This shouldn't be necessary, but Reflect doesn't send initial snapshot
+    // until first mutation.
   },
 };

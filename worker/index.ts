@@ -10,6 +10,6 @@ const authHandler = async (auth: string) => {
 const { worker, RoomDO, AuthDO } = createReflectServer({
   mutators,
   authHandler,
-  getLogLevel: () => "info",
+  getLogLevel: () => "debug",
 });
 export { worker as default, RoomDO, AuthDO };
