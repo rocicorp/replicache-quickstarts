@@ -25,29 +25,14 @@
 // on how Replicache syncs and resolves conflicts, but understanding that is not
 // required to get up and running.
 
-import type { WriteTransaction } from "@rocicorp/reflect";
-import { Todo, TodoUpdate } from "./todo";
+import { updateTodo, putTodo, deleteTodo } from "./todo";
 
 export type M = typeof mutators;
 
 export const mutators = {
-  updateTodo: async (tx: WriteTransaction, update: TodoUpdate) => {
-    // In a real app you may want to validate the incoming data is in fact a
-    // TodoUpdate. Check out https://www.npmjs.com/package/@rocicorp/rails for
-    // some heper functions to do this.
-    const prev = (await tx.get(update.id)) as Todo;
-    const next = { ...prev, ...update };
-    await tx.put(next.id, next);
-  },
-
-  deleteTodo: async (tx: WriteTransaction, id: string) => {
-    await tx.del(id);
-  },
-
-  createTodo: async (tx: WriteTransaction, todo: Todo) => {
-    await tx.put(todo.id, todo);
-  },
-
+  updateTodo,
+  deleteTodo,
+  putTodo,
   init: async () => {
     // This shouldn't be necessary, but Reflect doesn't send initial snapshot
     // until first mutation.

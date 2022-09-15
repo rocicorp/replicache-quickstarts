@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import React from "react";
 import { Reflect } from "@rocicorp/reflect";
 import { useSubscribe } from "replicache-react";
 
@@ -19,7 +18,7 @@ const App = ({ reflect }: { reflect: Reflect<M> }) => {
   // of these mutators runs immediately (optimistically) locally, then runs
   // again on the server-side automatically.
   const handleNewItem = (text: string) =>
-    reflect.mutate.createTodo({
+    reflect.mutate.putTodo({
       id: nanoid(),
       text,
       completed: false,
