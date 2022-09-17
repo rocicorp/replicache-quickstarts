@@ -25,16 +25,35 @@
 // on how Replicache syncs and resolves conflicts, but understanding that is not
 // required to get up and running.
 
-import { updateTodo, putTodo, deleteTodo } from "./todo";
+import { WriteTransaction } from "@rocicorp/reflect";
+import { updateTodo, deleteTodo, Todo, listTodos, putTodo } from "./todo";
 
 export type M = typeof mutators;
 
 export const mutators = {
   updateTodo,
   deleteTodo,
-  putTodo,
+
+  // This mutator creates a new todo, assigning the next available sort value.
+  //
+  // If two clients create new todos concurrently, they both might choose the
+  // same sort value locally (optimistically). That's fine because later when
+  // the mutator re-runs on the server the two todos will get unique values.
+  //
+  // Replicache will automatically sync the change back to the clients,
+  // reconcile any changes that happened client-side in the meantime, and update
+  // the UI to reflect the changes.
+  createTodo: async (tx: WriteTransaction, todo: Omit<Todo, "sort">) => {
+    const todos = await listTodos(tx);
+    todos.sort((t1, t2) => t1.sort - t2.sort);
+
+    const maxSort = todos.pop()?.sort ?? 0;
+    const newTodo: Todo = { ...todo, sort: maxSort + 1 };
+    await putTodo(tx, newTodo);
+  },
+
   init: async () => {
     // This shouldn't be necessary, but Reflect doesn't send initial snapshot
-    // until first mutation.
+    // until first mutation. Bug: https://github.com/rocicorp/reflect-server/issues/146.
   },
 };

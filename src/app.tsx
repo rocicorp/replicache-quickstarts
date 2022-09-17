@@ -18,11 +18,10 @@ const App = ({ reflect }: { reflect: Reflect<M> }) => {
   // of these mutators runs immediately (optimistically) locally, then runs
   // again on the server-side automatically.
   const handleNewItem = (text: string) =>
-    reflect.mutate.putTodo({
+    reflect.mutate.createTodo({
       id: nanoid(),
       text,
       completed: false,
-      sort: todos.length,
     });
 
   const handleUpdateTodo = (update: TodoUpdate) =>
