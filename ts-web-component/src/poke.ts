@@ -14,8 +14,8 @@ function sseReceiver(spaceID: string, onPoke: OnPoke): Cancel {
   const ev = new EventSource(`/api/replicache/poke-sse?spaceID=${spaceID}`, {
     withCredentials: true,
   });
-  ev.onmessage = async (event) => {
-    if (event.data === "poke") {
+  ev.onmessage = async event => {
+    if (event.data === 'poke') {
       await onPoke();
     }
   };
@@ -23,9 +23,9 @@ function sseReceiver(spaceID: string, onPoke: OnPoke): Cancel {
     ev.close();
   };
   // See https://bugzilla.mozilla.org/show_bug.cgi?id=833462
-  window.addEventListener("beforeunload", close);
+  window.addEventListener('beforeunload', close);
   return () => {
     close();
-    window.removeEventListener("beforeunload", close);
+    window.removeEventListener('beforeunload', close);
   };
 }

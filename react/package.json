@@ -20,7 +20,8 @@
     "todomvc-app-css": "^2.4.2"
   },
   "devDependencies": {
-    "@rocicorp/eslint-config": "^0.1.0",
+    "@rocicorp/prettier-config": "^0.1.1",
+    "@rocicorp/eslint-config": "^0.1.2",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
@@ -31,12 +32,5 @@
   "eslintConfig": {
     "extends": "@rocicorp/eslint-config"
   },
-  "prettier": {
-    "singleQuote": false,
-    "trailingComma": "es5",
-    "arrowParens": "always",
-    "bracketSpacing": true,
-    "tabWidth": 2,
-    "useTabs": false
-  }
+  "prettier": "@rocicorp/prettier-config"
 }
