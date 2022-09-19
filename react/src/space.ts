@@ -1,8 +1,8 @@
 export async function spaceExists(spaceID: string): Promise<boolean> {
-  const res = await fetch("/api/replicache/spaceExists", {
-    method: "POST",
+  const res = await fetch('/api/replicache/spaceExists', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       spaceID,
@@ -16,10 +16,10 @@ export async function spaceExists(spaceID: string): Promise<boolean> {
 }
 
 export async function createSpace(spaceID?: string): Promise<string> {
-  const res = await fetch("/api/replicache/createSpace", {
-    method: "POST",
+  const res = await fetch('/api/replicache/createSpace', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: spaceID
       ? JSON.stringify({

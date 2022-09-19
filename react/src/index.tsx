@@ -1,17 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./app";
-import { mutators } from "../../shared/mutators";
-import { Replicache } from "replicache";
-import { getPokeReceiver } from "./poke";
-import { createSpace, spaceExists } from "./space";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './app';
+import {mutators} from '../../shared/mutators';
+import {Replicache} from 'replicache';
+import {getPokeReceiver} from './poke';
+import {createSpace, spaceExists} from './space';
 
-const { pathname } = window.location;
-const paths = pathname.split("/");
+const {pathname} = window.location;
+const paths = pathname.split('/');
 const spaceIDUrlParam =
-  paths.indexOf("listID") > -1 ? paths[paths.indexOf("listID") + 1] : "";
-let spaceID = "";
+  paths.indexOf('listID') > -1 ? paths[paths.indexOf('listID') + 1] : '';
+let spaceID = '';
 if (spaceIDUrlParam) {
   spaceID = (await spaceExists(spaceIDUrlParam))
     ? spaceIDUrlParam
@@ -21,7 +21,7 @@ if (spaceIDUrlParam) {
 }
 
 if (spaceIDUrlParam !== spaceID) {
-  window.location.href = "/listID/" + spaceID;
+  window.location.href = '/listID/' + spaceID;
 }
 
 const r = new Replicache({
@@ -39,8 +39,8 @@ pokeReceiver(spaceID, async () => {
   await r.pull();
 });
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App rep={r} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

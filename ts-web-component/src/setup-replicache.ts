@@ -1,15 +1,15 @@
-import { getPokeReceiver } from "./poke";
-import { createSpace, spaceExists } from "./space";
-import { mutators } from "../../shared/mutators";
-import { Replicache } from "replicache";
-import type { M } from "../../shared/mutators";
-import { assert } from "./assert";
+import {getPokeReceiver} from './poke';
+import {createSpace, spaceExists} from './space';
+import {mutators} from '../../shared/mutators';
+import {Replicache} from 'replicache';
+import type {M} from '../../shared/mutators';
+import {assert} from './assert';
 
 export async function setupReplicache(): Promise<Replicache<M>> {
-  const { pathname } = window.location;
-  const paths = pathname.split("/");
+  const {pathname} = window.location;
+  const paths = pathname.split('/');
   let listId =
-    paths.indexOf("listId") > -1 ? paths[paths.indexOf("listId") + 1] : "";
+    paths.indexOf('listId') > -1 ? paths[paths.indexOf('listId') + 1] : '';
 
   if (listId) {
     const data = await spaceExists(listId);
@@ -22,12 +22,12 @@ export async function setupReplicache(): Promise<Replicache<M>> {
   if (!listId) {
     const spaceRes = await createSpace();
     listId = spaceRes.spaceID;
-    window.location.href = "/listId/" + listId;
+    window.location.href = '/listId/' + listId;
   }
 
   // See https://doc.replicache.dev/licensing for how to get a license key.
   const licenseKey = import.meta.env.VITE_REPLICACHE_LICENSE_KEY;
-  assert(licenseKey, "Missing VITE_REPLICACHE_LICENSE_KEY");
+  assert(licenseKey, 'Missing VITE_REPLICACHE_LICENSE_KEY');
 
   const r = new Replicache<M>({
     licenseKey,
