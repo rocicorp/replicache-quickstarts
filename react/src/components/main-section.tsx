@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Todo, TodoUpdate } from "../../../shared/todo";
-import Footer from "./footer";
-import TodoList from "./todo-list";
+import React, {useState} from 'react';
+import {Todo, TodoUpdate} from '../../../shared/todo';
+import Footer from './footer';
+import TodoList from './todo-list';
 
 const MainSection = ({
   todos,
@@ -15,30 +15,30 @@ const MainSection = ({
   onCompleteTodos: (completed: boolean, ids: string[]) => void;
 }) => {
   const todosCount = todos.length;
-  const completed = todos.filter((todo) => todo.completed);
+  const completed = todos.filter(todo => todo.completed);
   const completedCount = completed.length;
   const toggleAllValue = completedCount === todosCount;
 
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState('All');
 
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === "All") {
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'All') {
       return true;
     }
-    if (filter === "Active") {
+    if (filter === 'Active') {
       return !todo.completed;
     }
-    if (filter === "Completed") {
+    if (filter === 'Completed') {
       return todo.completed;
     }
-    throw new Error("Unknown filter: " + filter);
+    throw new Error('Unknown filter: ' + filter);
   });
 
   const handleCompleteAll = () => {
     const completed = !toggleAllValue;
     onCompleteTodos(
       completed,
-      todos.map((todo) => todo.id)
+      todos.map(todo => todo.id),
     );
   };
 
@@ -57,14 +57,14 @@ const MainSection = ({
       <TodoList
         todos={filteredTodos}
         onUpdateTodo={onUpdateTodo}
-        onDeleteTodo={(id) => onDeleteTodos([id])}
+        onDeleteTodo={id => onDeleteTodos([id])}
       />
       {todos.length > 0 && (
         <Footer
           completed={completedCount}
           active={todosCount - completedCount}
           onDeleteCompleted={() =>
-            onDeleteTodos(completed.map((todo) => todo.id))
+            onDeleteTodos(completed.map(todo => todo.id))
           }
           currentFilter={filter}
           onFilter={setFilter}

@@ -1,7 +1,7 @@
-import React from "react";
-import TodoTextInput from "./todo-text-input";
+import React from 'react';
+import TodoTextInput from './todo-text-input';
 
-const Header = ({ onNewItem }: { onNewItem: (text: string) => void }) => (
+const Header = ({onNewItem}: {onNewItem: (text: string) => void}) => (
   <header className="header">
     <h1>todos</h1>
     <TodoTextInput

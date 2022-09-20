@@ -1,6 +1,6 @@
-import React from "react";
-import { Todo, TodoUpdate } from "../../../shared/todo";
-import { TodoItem } from "./todo-item";
+import React from 'react';
+import {Todo, TodoUpdate} from '../../../shared/todo';
+import {TodoItem} from './todo-item';
 
 const TodoList = ({
   todos,
@@ -13,11 +13,11 @@ const TodoList = ({
 }) => {
   return (
     <ul className="todo-list">
-      {todos.map((todo) => (
+      {todos.map(todo => (
         <TodoItem
           todo={todo}
           key={todo.id}
-          onUpdate={(update) => onUpdateTodo(update)}
+          onUpdate={update => onUpdateTodo(update)}
           onDelete={() => onDeleteTodo(todo.id)}
         />
       ))}
