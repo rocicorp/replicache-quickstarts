@@ -2,7 +2,6 @@ import {listTodos, TodoUpdate, Todo} from '../../../shared/todo';
 import {nanoid} from 'nanoid';
 import type {Replicache} from 'replicache';
 import type {M} from '../../../shared/mutators';
-import {setupReplicache} from '../setup-replicache';
 import {assert} from '../assert.js';
 import {TodoItem, TodoItemEventHandlers} from './todo-item.js';
 
@@ -44,6 +43,21 @@ export class MyTodo extends HTMLElement {
   private _filteredList: Todo[] = [];
   private _filter: Filter = 'all';
   private _r: Replicache<M> | null = null;
+
+  set replicache(r: Replicache<M>) {
+    if (this._r) {
+      throw new Error('replicache already set');
+    }
+    this._r = r;
+    this._r.subscribe(listTodos, {
+      onData: data => {
+        this._list = data;
+        this._list.sort((a: Todo, b: Todo) => a.sort - b.sort);
+        this._filteredList = this._filteredTodos(this._filter);
+        this._render();
+      },
+    });
+  }
 
   private async _createTodo(text: string) {
     assert(this._r);
@@ -105,16 +119,6 @@ export class MyTodo extends HTMLElement {
     for (const filter of this._filterLinks) {
       filter.addEventListener('click', this._handleFilterClick);
     }
-
-    this._r = await setupReplicache();
-    this._r.subscribe(listTodos, {
-      onData: data => {
-        this._list = data;
-        this._list.sort((a: Todo, b: Todo) => a.sort - b.sort);
-        this._filteredList = this._filteredTodos(this._filter);
-        this._render();
-      },
-    });
   }
 
   async disconnectedCallback() {
