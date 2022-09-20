@@ -1,8 +1,8 @@
 ![Replicache logo](https://uploads-ssl.webflow.com/623a2f46e064937599256c2d/6269e72c61073c3d561a5015_Lockup%20v2.svg)
 
-# replicache-examples
+# replicache-quickstart
 
-This repository contains demos and sample code for [Replicache](https://replicache.dev/). There are multiple option to run various frontend framework with a common express server backend. The backend utilizes the [replicache-express](https://github.com/rocicorp/replicache-express) library which implements the `push`, `pull`, `poke`, `createSpace`, and `spaceExists` handlers required for Replicache sync protocol. This library intends to help developers easily experiment with various frontend frameworks integrated with Replicache.
+This repository contains quickstarts and sample code for [Replicache](https://replicache.dev/). There are multiple option to run various frontend framework with a common express server backend. The backend utilizes the [replicache-express](https://github.com/rocicorp/replicache-express) library which implements the `push`, `pull`, `poke`, `createSpace`, and `spaceExists` handlers required for Replicache sync protocol. This library intends to help developers easily experiment with various frontend frameworks integrated with Replicache.
 
 ## 1. Setup
 
