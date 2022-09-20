@@ -1,12 +1,12 @@
-import { listTodos, TodoUpdate, Todo } from "../../../shared/todo";
-import { nanoid } from "nanoid";
-import type { Replicache } from "replicache";
-import type { M } from "../../../shared/mutators";
-import { setupReplicache } from "../setup-replicache";
-import { assert } from "../assert.js";
-import { TodoItem, TodoItemEventHandlers } from "./todo-item.js";
+import {listTodos, TodoUpdate, Todo} from '../../../shared/todo';
+import {nanoid} from 'nanoid';
+import type {Replicache} from 'replicache';
+import type {M} from '../../../shared/mutators';
+import {setupReplicache} from '../setup-replicache';
+import {assert} from '../assert.js';
+import {TodoItem, TodoItemEventHandlers} from './todo-item.js';
 
-const templateTodo = document.createElement("template");
+const templateTodo = document.createElement('template');
 templateTodo.innerHTML = `
 <header class="header">
    <h1>Todos WC</h1>
@@ -33,7 +33,7 @@ templateTodo.innerHTML = `
 </footer>
 `;
 
-type Filter = "all" | "active" | "completed";
+type Filter = 'all' | 'active' | 'completed';
 
 export class MyTodo extends HTMLElement {
   private _listContainer: Element | null = null;
@@ -42,7 +42,7 @@ export class MyTodo extends HTMLElement {
   private _filterLinks: Iterable<Element> = [];
   private _list: Todo[] = [];
   private _filteredList: Todo[] = [];
-  private _filter: Filter = "all";
+  private _filter: Filter = 'all';
   private _r: Replicache<M> | null = null;
 
   private async _createTodo(text: string) {
@@ -73,21 +73,21 @@ export class MyTodo extends HTMLElement {
 
   private _handleTodoInputKeyUp = async (e: KeyboardEvent) => {
     assert(this._newTodoInput);
-    const { value } = this._newTodoInput;
-    if (e.key === "Enter" && value) {
-      this._newTodoInput.value = "";
+    const {value} = this._newTodoInput;
+    if (e.key === 'Enter' && value) {
+      this._newTodoInput.value = '';
       await this._createTodo(value);
     }
   };
 
   private _filteredTodos(filter: Filter) {
-    return this._list.filter((todo) => {
+    return this._list.filter(todo => {
       switch (filter) {
-        case "all":
+        case 'all':
           return true;
-        case "active":
+        case 'active':
           return !todo.completed;
-        case "completed":
+        case 'completed':
           return todo.completed;
       }
     });
@@ -95,20 +95,20 @@ export class MyTodo extends HTMLElement {
 
   async connectedCallback() {
     this.appendChild(templateTodo.content.cloneNode(true));
-    this._newTodoInput = this.querySelector(".new-todo");
-    this._listContainer = this.querySelector(".todo-list");
-    this._itemCount = this.querySelector(".item-count");
-    this._filterLinks = this.querySelectorAll(".filters a");
+    this._newTodoInput = this.querySelector('.new-todo');
+    this._listContainer = this.querySelector('.todo-list');
+    this._itemCount = this.querySelector('.item-count');
+    this._filterLinks = this.querySelectorAll('.filters a');
     assert(this._newTodoInput);
-    this._newTodoInput.addEventListener("keyup", this._handleTodoInputKeyUp);
+    this._newTodoInput.addEventListener('keyup', this._handleTodoInputKeyUp);
 
     for (const filter of this._filterLinks) {
-      filter.addEventListener("click", this._handleFilterClick);
+      filter.addEventListener('click', this._handleFilterClick);
     }
 
     this._r = await setupReplicache();
     this._r.subscribe(listTodos, {
-      onData: (data) => {
+      onData: data => {
         this._list = data;
         this._list.sort((a: Todo, b: Todo) => a.sort - b.sort);
         this._filteredList = this._filteredTodos(this._filter);
@@ -125,31 +125,31 @@ export class MyTodo extends HTMLElement {
     assert(this._listContainer);
     assert(this._itemCount);
     this._itemCount.textContent = `${this._list.length}`;
-    this._listContainer.textContent = "";
+    this._listContainer.textContent = '';
     for (const todo of this._filteredList) {
       const item = new TodoItem() as TodoItem & TodoItemEventHandlers;
       item.text = todo.text;
       item.completed = todo.completed;
       item.todoID = todo.id;
-      item.addEventListener("onRemove", this._handleDeleteTodos);
-      item.addEventListener("onToggle", this._handleUpdateTodo);
+      item.addEventListener('onRemove', this._handleDeleteTodos);
+      item.addEventListener('onToggle', this._handleUpdateTodo);
 
       this._listContainer.appendChild(item);
     }
 
     for (const filter of this._filterLinks) {
-      filter.classList.toggle("selected", filter.id === this._filter);
+      filter.classList.toggle('selected', filter.id === this._filter);
     }
   }
 }
 
 function asFilter(id: string): Filter {
   switch (id) {
-    case "all":
-    case "active":
-    case "completed":
+    case 'all':
+    case 'active':
+    case 'completed':
       return id;
     default:
-      throw new Error("Unknown filter: " + id);
+      throw new Error('Unknown filter: ' + id);
   }
 }

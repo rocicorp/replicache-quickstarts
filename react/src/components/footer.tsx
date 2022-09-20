@@ -1,7 +1,7 @@
-import React from "react";
-import FilterLink from "./link";
+import React from 'react';
+import FilterLink from './link';
 
-const FILTER_TITLES = ["All", "Active", "Completed"];
+const FILTER_TITLES = ['All', 'Active', 'Completed'];
 
 const Footer = ({
   active,
@@ -16,14 +16,14 @@ const Footer = ({
   onFilter: (filter: string) => void;
   onDeleteCompleted: () => void;
 }) => {
-  const itemWord = active === 1 ? "item" : "items";
+  const itemWord = active === 1 ? 'item' : 'items';
   return (
     <footer className="footer">
       <span className="todo-count">
-        <strong>{active || "No"}</strong> {itemWord} left
+        <strong>{active || 'No'}</strong> {itemWord} left
       </span>
       <ul className="filters">
-        {FILTER_TITLES.map((filter) => (
+        {FILTER_TITLES.map(filter => (
           <li key={filter}>
             <FilterLink
               onClick={() => onFilter(filter)}

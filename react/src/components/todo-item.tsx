@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import classnames from "classnames";
-import { Todo, TodoUpdate } from "../../../shared/todo";
-import TodoTextInput from "./todo-text-input";
+import React, {useState} from 'react';
+import classnames from 'classnames';
+import {Todo, TodoUpdate} from '../../../shared/todo';
+import TodoTextInput from './todo-text-input';
 
 export function TodoItem({
   todo,
@@ -12,7 +12,7 @@ export function TodoItem({
   onUpdate: (update: TodoUpdate) => void;
   onDelete: () => void;
 }) {
-  const { id } = todo;
+  const {id} = todo;
   const [editing, setEditing] = useState(false);
 
   const handleDoubleClick = () => {
@@ -23,13 +23,12 @@ export function TodoItem({
     if (text.length === 0) {
       onDelete();
     } else {
-      onUpdate({ id, text });
+      onUpdate({id, text});
     }
     setEditing(false);
   };
 
-  const handleToggleComplete = () =>
-    onUpdate({ id, completed: !todo.completed });
+  const handleToggleComplete = () => onUpdate({id, completed: !todo.completed});
 
   let element;
   if (editing) {

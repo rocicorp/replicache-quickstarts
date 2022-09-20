@@ -4,8 +4,8 @@ import React, {
   KeyboardEvent,
   useRef,
   useState,
-} from "react";
-import classnames from "classnames";
+} from 'react';
+import classnames from 'classnames';
 
 export default function TodoTextInput({
   initial,
@@ -22,9 +22,9 @@ export default function TodoTextInput({
   const ref = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onSubmit(textInput);
-      setTextInput("");
+      setTextInput('');
     }
   };
 
@@ -42,8 +42,8 @@ export default function TodoTextInput({
     <input
       ref={ref}
       className={classnames({
-        edit: initial !== "",
-        "new-todo": initial === "",
+        'edit': initial !== '',
+        'new-todo': initial === '',
       })}
       type="text"
       placeholder={placeholder}
