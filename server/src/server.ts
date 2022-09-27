@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import path from 'path';
 import {ReplicacheExpressServer} from 'replicache-express';
-import {mutators} from '../../shared/mutators';
+import {mutators} from 'replicache-quickstarts-shared';
 import {fileURLToPath} from 'url';
 import express from 'express';
 import fs from 'fs';
@@ -15,7 +15,7 @@ const options = {
   host: process.env.HOST || 'localhost',
 };
 
-const default_dist = path.join(__dirname, '../../dist');
+const default_dist = path.join(__dirname, './dist');
 
 if (process.env.NODE_ENV === 'production') {
   const r = new ReplicacheExpressServer(options);
@@ -35,6 +35,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 } else {
   ReplicacheExpressServer.start(options, () => {
-    console.log(`Server listening on 2 ${options.host}:${options.port}`);
+    console.log(`Server listening on ${options.host}:${options.port}`);
   });
 }

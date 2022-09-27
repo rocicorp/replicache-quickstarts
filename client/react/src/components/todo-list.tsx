@@ -1,5 +1,4 @@
-import React from 'react';
-import {Todo, TodoUpdate} from '../../../shared/todo';
+import {Todo, TodoUpdate} from 'replicache-quickstarts-shared';
 import {TodoItem} from './todo-item';
 
 const TodoList = ({

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './app';
-import {mutators} from '../../shared/mutators';
+import {mutators} from 'replicache-quickstarts-shared';
 import {Replicache} from 'replicache';
 import {createSpace, spaceExists} from './space';
 

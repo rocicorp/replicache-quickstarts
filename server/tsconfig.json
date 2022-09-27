@@ -12,11 +12,16 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "outDir": "lib",
+    "outDir": "dist",
     "allowJs": true,
     // esnext for Object.fromEntries
     "lib": ["dom", "DOM.Iterable", "esnext"],
-    "preserveSymlinks": true
+    "preserveSymlinks": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "replicache": ["node_modules/replicache/out/replicache"]
+    }
   },
   "include": ["**/src/**/*.ts"],
   "exclude": ["node_modules", "lib"]

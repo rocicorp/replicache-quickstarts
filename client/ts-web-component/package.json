@@ -1,5 +1,5 @@
 {
-  "name": "replicache-todo-ts-component",
+  "name": "replicache-quickstarts-todo-ts-component",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,14 +7,19 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "dev": "vite",
     "build": "npm run lint && tsc && vite build",
+    "build:server": "cd ../../server && npm run build",
     "preview": "vite preview",
     "format": "prettier --write './**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
-    "check-format": "prettier --check './**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'"
+    "check-format": "prettier --check './**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
+    "clean": "rm -rf ./dist && mkdir -p ./dist",
+    "prod": "npm run build:server && npm run clean && npm run build && cp -r ./dist/ ../../server/dist/ && cd ../../server && npm run prod",
+    "server": "cd ../../server && npm run dev"
   },
   "dependencies": {
     "nanoid": "^4.0.0",
     "replicache": ">=11.2.1",
-    "replicache-react": "^2.9.0"
+    "replicache-react": "^2.9.0",
+    "replicache-quickstarts-shared": "^0.1.0"
   },
   "devDependencies": {
     "@rocicorp/prettier-config": "^0.1.1",
@@ -27,4 +32,5 @@
     "extends": "@rocicorp/eslint-config"
   },
   "prettier": "@rocicorp/prettier-config"
+  
 }

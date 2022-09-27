@@ -1,5 +1,5 @@
 import {Replicache} from 'replicache';
-import {mutators} from '../../shared/mutators';
+import {mutators} from 'replicache-quickstarts-shared';
 import {MyTodo} from './component/my-todo';
 import {TodoItem} from './component/todo-item';
 import {createSpace, spaceExists} from './space';

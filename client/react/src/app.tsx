@@ -3,8 +3,8 @@ import React from 'react';
 import {Replicache} from 'replicache';
 import {useSubscribe} from 'replicache-react';
 
-import {M} from '../../shared/mutators';
-import {listTodos, TodoUpdate} from '../../shared/todo';
+import {M} from 'replicache-quickstarts-shared';
+import {listTodos, TodoUpdate} from 'replicache-quickstarts-shared';
 
 import Header from './components/header';
 import MainSection from './components/main-section';
@@ -14,7 +14,6 @@ const App = ({rep}: {rep: Replicache<M>}) => {
   // Subscribe to all todos and sort them.
   const todos = useSubscribe(rep, listTodos, [], [rep]);
   todos.sort((a, b) => a.sort - b.sort);
-
   // Define event handlers and connect them to Replicache mutators. Each
   // of these mutators runs immediately (optimistically) locally, then runs
   // again on the server-side automatically.
