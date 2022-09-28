@@ -1,12 +1,21 @@
 {
-  "name": "replicache-quickstarts",
-  "version": "0.1.0",
-  "private": true,
+  "name": "create-replicache-quickstarts",
+  "version": "0.1.4",
   "devDependencies": {
     "@rocicorp/eslint-config": "^0.1.2",
     "@rocicorp/prettier-config": "^0.1.1",
     "typescript": "4.7.4"
   },
+  "bin": {
+    "create-replicache-quickstarts": "index.cjs"
+  },
+  "files": [
+    "index.cjs",
+    ".gitignore",
+    "client/*",
+    "server",
+    "shared"
+  ],
   "scripts": {
     "format": "npm run format --ws",
     "check-format": "npm run check-format --ws",
