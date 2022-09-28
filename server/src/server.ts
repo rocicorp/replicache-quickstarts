@@ -15,7 +15,7 @@ const options = {
   host: process.env.HOST || 'localhost',
 };
 
-const default_dist = path.join(__dirname, './dist');
+const default_dist = path.join(__dirname, '../dist/dist');
 
 if (process.env.NODE_ENV === 'production') {
   const r = new ReplicacheExpressServer(options);

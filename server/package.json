@@ -25,7 +25,7 @@
     "build": "rm -rf ./dist && tsc",
     "check-types": "tsc --noEmit",
     "dev": "nodemon",
-    "prod": "NODE_ENV=production node --loader ts-node/esm  --experimental-specifier-resolution=node ./dist/server.js"
+    "prod": "NODE_ENV=production node --loader ts-node/esm  --experimental-specifier-resolution=node ./src/server.ts"
   },
   "type": "module",
   "eslintConfig": {
