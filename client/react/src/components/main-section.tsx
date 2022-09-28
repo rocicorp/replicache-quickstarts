@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Todo, TodoUpdate} from 'replicache-quickstarts-shared';
 import Footer from './footer';
 import TodoList from './todo-list';

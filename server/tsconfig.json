@@ -17,11 +17,7 @@
     // esnext for Object.fromEntries
     "lib": ["dom", "DOM.Iterable", "esnext"],
     "preserveSymlinks": true,
-    "types": ["node"],
-    "baseUrl": ".",
-    "paths": {
-      "replicache": ["node_modules/replicache/out/replicache"]
-    }
+    "types": ["node"]
   },
   "include": ["**/src/**/*.ts"],
   "exclude": ["node_modules", "lib"]

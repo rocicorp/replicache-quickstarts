@@ -1,7 +1,6 @@
-import {listTodos, TodoUpdate, Todo} from 'replicache-quickstarts-shared';
+import {M, listTodos, TodoUpdate, Todo} from 'replicache-quickstarts-shared';
 import {nanoid} from 'nanoid';
 import type {Replicache} from 'replicache';
-import type {M} from 'replicache-quickstarts-shared';
 import {assert} from '../assert.js';
 import {TodoItem, TodoItemEventHandlers} from './todo-item.js';
 
