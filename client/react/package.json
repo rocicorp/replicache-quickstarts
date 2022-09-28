@@ -12,8 +12,8 @@
     "preview": "vite preview",
     "format": "prettier --write './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
     "check-format": "prettier --check './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
-    "clean": "rm -rf ./dist && mkdir -p ./dist",
-    "prod": "npm run build:server && npm run clean && npm run build && cp -r ./dist/ ../../server/dist/ && cd ../../server && npm run prod",
+    "clean": "rm -rf ./dist; mkdir -p ./dist",
+    "prod": "npm run build:server; npm run clean; npm run build; cp -r ./dist/ ../../server/dist/; cd ../../server; npm run prod",
     "server": "cd ../../server && npm run dev",
     "watch": "concurrently --kill-others 'npm run server' 'npm run check-types -- --watch' 'npm run dev'"
   },
