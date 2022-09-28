@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import classnames from 'classnames';
-import {Todo, TodoUpdate} from '../../../shared/todo';
+import {Todo, TodoUpdate} from 'replicache-quickstarts-shared';
 import TodoTextInput from './todo-text-input';
 
 export function TodoItem({

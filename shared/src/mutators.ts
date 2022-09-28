@@ -25,8 +25,8 @@
 // on how Replicache syncs and resolves conflicts, but understanding that is not
 // required to get up and running.
 
-import type { WriteTransaction } from "replicache";
-import { Todo, listTodos, TodoUpdate } from "./todo";
+import type {WriteTransaction} from 'replicache';
+import {Todo, listTodos, TodoUpdate} from './todo';
 
 export type M = typeof mutators;
 
@@ -36,7 +36,7 @@ export const mutators = {
     // TodoUpdate. Check out https://www.npmjs.com/package/@rocicorp/rails for
     // some heper functions to do this.
     const prev = (await tx.get(update.id)) as Todo;
-    const next = { ...prev, ...update };
+    const next = {...prev, ...update};
     await tx.put(next.id, next);
   },
 
@@ -53,11 +53,11 @@ export const mutators = {
   // Replicache will automatically sync the change back to the clients,
   // reconcile any changes that happened client-side in the meantime, and update
   // the UI to reflect the changes.
-  createTodo: async (tx: WriteTransaction, todo: Omit<Todo, "sort">) => {
+  createTodo: async (tx: WriteTransaction, todo: Omit<Todo, 'sort'>) => {
     const todos = await listTodos(tx);
     todos.sort((t1, t2) => t1.sort - t2.sort);
 
     const maxSort = todos.pop()?.sort ?? 0;
-    await tx.put(todo.id, { ...todo, sort: maxSort + 1 });
+    await tx.put(todo.id, {...todo, sort: maxSort + 1});
   },
 };

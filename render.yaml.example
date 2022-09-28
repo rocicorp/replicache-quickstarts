@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: replicache-examples-<framework>-todo # change e.g. (replicache-examples-react-todo)
+    name: replicache-quickstarts-todo-<framework> # change e.g. (replicache-quickstarts-todo-react)
     env: node
     region: oregon # optional (defaults to oregon)
     plan: starter # optional (defaults to starter)
