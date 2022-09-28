@@ -24,18 +24,12 @@ $ export VITE_REPLICACHE_LICENSE_KEY="<your license key>"
 $ npm install; npm run build;
 ```
 
-## 2. Start the `replicache-express` server backend
-
-```bash
-$ npm run dev
-```
-
-## 3. Decide on a framework and start frontend
+## 2. Decide on a framework and start frontend and backend watcher
 
 #### [react](/react)
 
 ```bash
-$ cd ./client/react && npm run dev
+$ cd ./client/react && npm run watch
 ```
 
 Provides an example integrating replicache with react in a simple todo application.
@@ -45,7 +39,7 @@ Provides an example integrating replicache with react in a simple todo applicati
 Provides an example integrating replicache with vanilla typescript in a simple todo application. This library utilizes W3C standard web-components. It does not have any requirements to run any external library frameworks.
 
 ```bash
-$ $ cd ./client/ts-web-component && npm run dev
+$ cd ./client/ts-web-component && npm run watch
 ```
 
 ## Production mode
@@ -68,7 +62,7 @@ Open the YAML file and modify the following lines to the appropriate framework
 
 ```
 name: replicache-quickstarts-todo-<framework> # change e.g. (replicache-quickstarts-todo-<framework>)
-startCommand: "cd ./client/react && npm run prod" # change e.g. (npm run prod:react)
+startCommand: "cd ./client/<framework> && npm run prod" 
 ```
 
 Commit the changes and follow the direction on [Deploying to Render](https://doc.replicache.dev/deploy-render)
