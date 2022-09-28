@@ -19,8 +19,8 @@
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "format": "prettier --write './**/src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
-    "check-format": "prettier --check './**/src/*/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
+    "format": "prettier --write './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
+    "check-format": "prettier --check './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "build": "rm -rf ./dist && npm run lint && tsc",
     "check-types": "tsc --noEmit",
