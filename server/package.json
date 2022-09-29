@@ -22,10 +22,10 @@
     "format": "prettier --write './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
     "check-format": "prettier --check './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
-    "build": "rm -rf ./dist && npm run lint && tsc",
+    "build": "rm -rf ./dist && tsc",
     "check-types": "tsc --noEmit",
     "dev": "nodemon",
-    "prod": "NODE_ENV=production node --loader ts-node/esm  --experimental-specifier-resolution=node ./dist/server.js"
+    "prod": "NODE_ENV=production node --loader ts-node/esm  --experimental-specifier-resolution=node ./src/server.ts"
   },
   "type": "module",
   "eslintConfig": {
