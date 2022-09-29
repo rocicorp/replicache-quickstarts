@@ -12,7 +12,7 @@ const port = Number.isInteger(portEnv) ? portEnv : 8080;
 const options = {
   mutators,
   port,
-  host: process.env.HOST || 'localhost',
+  host: process.env.HOST || '0.0.0.0',
 };
 
 const default_dist = path.join(__dirname, '../dist/dist');
