@@ -5,7 +5,8 @@ const cwd = process.cwd();
 const os = require('os');
 
 if (process.argv.length !== 4) {
-  console.log('Usage: npm create replicache-quickstarts -- <projectName> <type>');
+  console.log('Usages: npm create replicache-app -- <projectName> <type>');
+  console.log('        npx create-replicache-app <projectName> <type>');
   process.exit(1);
 }
 
