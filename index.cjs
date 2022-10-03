@@ -6,13 +6,13 @@ const os = require('os');
 
 if (process.argv.length !== 4) {
   console.log('Usage: npm create replicache-quickstarts -- <projectName> <type>');
-  process.exit(0);
+  process.exit(1);
 }
 
 const projectName = process.argv[2];
 if (!isValidPackageName(projectName)) {
   console.log('Invalid project name');
-  process.exit(0);
+  process.exit(1);
 }
 const type = process.argv[3];
 const availableClientsFolders = fs
@@ -25,7 +25,7 @@ const availableClientNames = availableClientsFolders.map(dirent => dirent.name);
 if (!availableClientNames.includes(type)) {
   console.log(`Unknown client type: ${type}`);
   console.log(`Available clients: ${availableClientNames.join(', ')}`);
-  process.exit(0);
+  process.exit(1);
 }
 
 const replicacheQuickstartsDest = path.join(
@@ -39,7 +39,7 @@ if (fs.existsSync(replicacheQuickstartsDest)) {
   );
   process.exit(1);
 }
-
+// https://docs.npmjs.com/cli/v8/configuring-npm/package-json#name
 function isValidPackageName(projectName) {
   return /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(
     projectName

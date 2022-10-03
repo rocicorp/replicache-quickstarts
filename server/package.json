@@ -31,5 +31,8 @@
   "eslintConfig": {
     "extends": "@rocicorp/eslint-config"
   },
-  "prettier": "@rocicorp/prettier-config"
+  "prettier": "@rocicorp/prettier-config",
+  "engines": {
+    "node": ">=16.15.0"
+  }
 }
