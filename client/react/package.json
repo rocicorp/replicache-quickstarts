@@ -15,7 +15,7 @@
     "clean": "rm -rf ./dist; mkdir -p ./dist",
     "prod": "cp -r ./dist/ ../../server/dist/; cd ../../server; npm run prod",
     "server": "cd ../../server && npm run dev",
-    "watch": "concurrently --kill-others 'npm run server' 'npm run check-types -- --watch' 'sleep 3; npm run dev'"
+    "watch": "concurrently --kill-others 'npm run server' 'npm run check-types -- --watch --preserveWatchOutput' 'sleep 3; npm run dev'"
   },
   "dependencies": {
     "classnames": "^2.3.1",
