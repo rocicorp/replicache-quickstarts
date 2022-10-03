@@ -11,7 +11,6 @@
     "format": "prettier --write './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
     "check-format": "prettier --check './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
-    "build": "tsc",
     "check-types": "tsc --noEmit"
   },
   "type": "module",
@@ -19,9 +18,5 @@
     "extends": "@rocicorp/eslint-config"
   },
   "prettier": "@rocicorp/prettier-config",
-  "engines": {
-    "node": ">=16.15.0",
-    "npm": ">=7.0.0"
-  },
   "main": "src/index.ts"
 }

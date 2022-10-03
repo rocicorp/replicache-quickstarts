@@ -2,29 +2,35 @@
 const fs = require('fs');
 const path = require('path');
 const cwd = process.cwd();
+const os = require('os');
 
-if (process.argv.length !== 3) {
-  console.log('Usage: npm create replicache-quickstarts -- <type>');
-  process.exit(1);
+if (process.argv.length !== 4) {
+  console.log('Usage: npm create replicache-quickstarts -- <projectName> <type>');
+  process.exit(0);
 }
 
-const type = process.argv[2];
+const projectName = process.argv[2];
+if (!isValidPackageName(projectName)) {
+  console.log('Invalid project name');
+  process.exit(0);
+}
+const type = process.argv[3];
 const availableClientsFolders = fs
   .readdirSync(path.join(__dirname, 'client'), {
     withFileTypes: true,
   })
   .filter(dirent => dirent.isDirectory());
 const availableClientNames = availableClientsFolders.map(dirent => dirent.name);
-
+1
 if (!availableClientNames.includes(type)) {
   console.log(`Unknown client type: ${type}`);
   console.log(`Available clients: ${availableClientNames.join(', ')}`);
-  process.exit(1);
+  process.exit(0);
 }
 
 const replicacheQuickstartsDest = path.join(
   cwd,
-  `replicache-quickstarts-${type}`,
+  projectName,
 );
 
 if (fs.existsSync(replicacheQuickstartsDest)) {
@@ -34,20 +40,74 @@ if (fs.existsSync(replicacheQuickstartsDest)) {
   process.exit(1);
 }
 
+function isValidPackageName(projectName) {
+  return /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(
+    projectName
+  )
+}
+
 function copyQuickstarts() {
-  fs.cpSync(__dirname, replicacheQuickstartsDest, {recursive: true});
+  fs.cpSync(__dirname, replicacheQuickstartsDest, { recursive: true });
   console.log(`Created ${replicacheQuickstartsDest}`);
   const deleteClientsList = availableClientsFolders.filter(
     dirent => dirent.name !== type,
   );
 
+  //clean up quickstarts
+  let filesToDelete = [];
   for (const client of deleteClientsList) {
-    deletePath = path.join(replicacheQuickstartsDest, 'client', client.name);
-    fs.rmSync(deletePath, {
+    deleteClient = path.join(replicacheQuickstartsDest, 'client', client.name);
+    filesToDelete.push(deleteClient);
+  }
+
+  //clean up misc files
+  deleteIndex = path.join(replicacheQuickstartsDest, 'index.cjs');
+  deletePackageJson = path.join(replicacheQuickstartsDest, 'package.json');
+  deleteReadme = path.join(replicacheQuickstartsDest, 'README.md');
+  deleteLicense = path.join(replicacheQuickstartsDest, 'LICENSE');
+  filesToDelete.push(deleteIndex, deletePackageJson, deleteReadme, deleteLicense);
+  for (const fileToDelete of filesToDelete) {
+    fs.rmSync(fileToDelete, {
       recursive: true,
       force: true,
     });
   }
+  //write package.json
+  const packageJson = {
+    name: projectName,
+    version: "0.1.0",
+    devDependencies: {
+      "@rocicorp/eslint-config": "^0.1.2",
+      "@rocicorp/prettier-config": "^0.1.1",
+      "typescript": "4.7.4"
+    },
+    scripts: {
+      "format": "npm run format --ws",
+      "check-format": "npm run check-format --ws",
+      "lint": "npm run lint --ws",
+      "build": "npm run build -ws",
+      "check-types": "npm run check-types --ws"
+    },
+    type: "module",
+    eslintConfig: {
+      "extends": "@rocicorp/eslint-config"
+    },
+    prettier: "@rocicorp/prettier-config",
+    engines: {
+      "node": ">=16.15.0",
+      "npm": ">=7.0.0"
+    },
+    workspaces: [
+      "client/*",
+      "server",
+      "shared"
+    ]
+  }
+
+  fs.writeFileSync(
+    path.join(replicacheQuickstartsDest, 'package.json'),
+    JSON.stringify(packageJson, null, 2) + os.EOL
+  )
 }
 
 try {
