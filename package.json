@@ -1,6 +1,6 @@
 {
-  "name": "create-replicache-quickstarts",
-  "version": "0.1.4",
+  "name": "create-replicache-app",
+  "version": "0.1.7",
   "devDependencies": {
     "@rocicorp/eslint-config": "^0.1.2",
     "@rocicorp/prettier-config": "^0.1.1",
@@ -10,7 +10,6 @@
     "create-replicache-quickstarts": "index.cjs"
   },
   "files": [
-    "index.cjs",
     ".gitignore",
     "client/*",
     "server",
@@ -20,7 +19,7 @@
     "format": "npm run format --ws",
     "check-format": "npm run check-format --ws",
     "lint": "npm run lint --ws",
-    "build": "npm run build -ws",
+    "build": "npm run build -ws --if-present",
     "check-types": "npm run check-types --ws"
   },
   "type": "module",

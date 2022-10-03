@@ -1,7 +1,7 @@
 {
   "name": "replicache-quickstarts-todo-ts-component",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
@@ -15,7 +15,7 @@
     "clean": "rm -rf ./dist; mkdir -p ./dist",
     "prod": "cp -r ./dist/ ../../server/dist/; cd ../../server; npm run prod",
     "server": "cd ../../server && npm run dev",
-    "watch": "concurrently --kill-others 'npm run server' 'npm run check-types -- --watch' 'npm run dev'"
+    "watch": "concurrently --kill-others 'npm run server' 'npm run check-types -- --watch' 'sleep 3; npm run dev'"
   },
   "dependencies": {
     "nanoid": "^4.0.0",

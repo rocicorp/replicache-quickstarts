@@ -33,7 +33,6 @@
   },
   "prettier": "@rocicorp/prettier-config",
   "engines": {
-    "node": ">=16.15.0",
-    "npm": ">=7.0.0"
+    "node": ">=16.15.0"
   }
 }
