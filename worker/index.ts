@@ -11,6 +11,5 @@ const { worker, RoomDO, AuthDO } = createReflectServer({
   mutators,
   authHandler,
   getLogLevel: () => "debug",
-  allowUnconfirmedWrites: false,
 });
 export { worker as default, RoomDO, AuthDO };

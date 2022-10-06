@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "dev": "vite",
-    "dev-worker": "wrangler dev --local --experimental-enable-local-persistence",
+    "dev-worker": "wrangler dev",
     "build": "npm run lint && tsc && vite build",
     "preview": "vite preview",
     "format": "prettier --write './src/*/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'"
@@ -14,8 +14,8 @@
   "devDependencies": {
     "@rocicorp/eslint-config": "^0.1.0",
     "@rocicorp/rails": "^0.2.2",
-    "@rocicorp/reflect": "^0.8.0",
-    "@rocicorp/reflect-server": "^0.16.0",
+    "@rocicorp/reflect": "^0.10.0",
+    "@rocicorp/reflect-server": "^0.18.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
