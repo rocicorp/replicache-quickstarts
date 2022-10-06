@@ -67,12 +67,18 @@ function copyQuickstarts() {
   deleteReadme = path.join(replicacheQuickstartsDest, 'README.md');
   deleteLicense = path.join(replicacheQuickstartsDest, 'LICENSE');
   filesToDelete.push(deleteIndex, deletePackageJson, deleteReadme, deleteLicense);
+  // server is not necesary for nextjs
+  if (type === 'nextjs') {
+    filesToDelete.push(path.join(replicacheQuickstartsDest, 'server'));
+  }
   for (const fileToDelete of filesToDelete) {
     fs.rmSync(fileToDelete, {
       recursive: true,
       force: true,
     });
   }
+
+
   //write package.json
   const packageJson = {
     name: projectName,
@@ -86,7 +92,7 @@ function copyQuickstarts() {
       "format": "npm run format --ws",
       "check-format": "npm run check-format --ws",
       "lint": "npm run lint --ws",
-      "build": "npm run build -ws",
+      "build": "npm run build -ws --if-present",
       "check-types": "npm run check-types --ws"
     },
     type: "module",

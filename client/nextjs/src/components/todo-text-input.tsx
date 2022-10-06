@@ -43,7 +43,7 @@ export default function TodoTextInput({
       ref={ref}
       className={classnames({
         'edit': initial !== '',
-        'new-todo': initial == '',
+        'new-todo': initial === '',
       })}
       type="text"
       placeholder={placeholder}
