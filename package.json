@@ -1,6 +1,6 @@
 {
   "name": "create-replicache-app",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "devDependencies": {
     "@rocicorp/eslint-config": "^0.1.2",
     "@rocicorp/prettier-config": "^0.1.1",
