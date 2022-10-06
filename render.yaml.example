@@ -5,7 +5,7 @@ services:
     region: oregon # optional (defaults to oregon)
     plan: starter # optional (defaults to starter)
     buildCommand: "npm install && npm run build" # optional (defaults to Dockerfile command)
-    startCommand: "npm run prod:<framework>" # change e.g. (npm run prod:react)
+    startCommand: "npm run prod --ws"
     numInstances: 1 # optional (defaults to 1)
     envVars:
       - key: VITE_REPLICACHE_LICENSE_KEY 
