@@ -8,8 +8,7 @@ import { nanoid } from "nanoid";
 
 const userID = nanoid();
 const roomID = "s1";
-const socketOrigin = "ws://localhost:8787";
-//("wss://reflect-todo.replicache.workers.dev");
+const socketOrigin = "wss://reflect-todo.replicache.workers.dev";
 
 const r = new Reflect({
   socketOrigin,
