@@ -12,10 +12,11 @@ This repository contains quickstarts and sample code for [Replicache](https://re
 $ npx replicache get-license
 ```
 
-#### Set your `VITE_REPLICACHE_LICENSE_KEY` environment variable
+#### Set your `VITE_REPLICACHE_LICENSE_KEY` or `NEXT_PUBLIC_REPLICACHE_LICENSE_KEY` environment variable
 
 ```bash
 $ export VITE_REPLICACHE_LICENSE_KEY="<your license key>"
+$ export NEXT_PUBLIC_REPLICACHE_LICENSE_KEY="<your license key>"
 ```
 
 #### Install and Build
@@ -29,7 +30,7 @@ $ npm install; npm run build;
 #### [react](/react)
 
 ```bash
-$ cd ./client/react && npm run watch
+$ npm run watch --ws
 ```
 
 Provides an example integrating replicache with react in a simple todo application.
@@ -39,7 +40,15 @@ Provides an example integrating replicache with react in a simple todo applicati
 Provides an example integrating replicache with vanilla typescript in a simple todo application. This library utilizes W3C standard web-components. It does not have any requirements to run any external library frameworks.
 
 ```bash
-$ cd ./client/ts-web-component && npm run watch
+$ npm run watch --ws
+```
+
+#### [nextjs](/nextjs)
+
+Provides an example integrating replicache with react and Next.js in a simple todo application.
+
+```bash
+$ npm run dev --ws
 ```
 
 ## Production mode
@@ -47,7 +56,7 @@ $ cd ./client/ts-web-component && npm run watch
 The server can serve the output of the various frameworks and be run as a static server to simulate a production environment.
 
 ```bash
-$ cd ./client/<framework> && npm run prod
+$ npm run prod --ws
 ```
 
 ## Deploying to Render
