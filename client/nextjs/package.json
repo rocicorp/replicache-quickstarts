@@ -1,0 +1,43 @@
+{
+  "name": "replicache-todo",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "prod": "next build; next start",
+    "format": "prettier --write './**/*.{js,jsx,json,ts,tsx,html,css,md}'",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
+    "check-types": "tsc --noEmit",
+    "check-format": "prettier --check './src/**/*.{js,jsx,json,ts,tsx,html,css,md}' '*.{cjs,js,jsx,json,ts,tsx,html,css,md}'"
+  },
+  "engines": {
+    "//": "replicache-nextjs requires npm >= 7. This was released in Node 15, but 16 is current stable so we choose that. Render looks at package.json to determine which Node to use: https://render.com/docs/node-version.",
+    "node": ">=16.15.0"
+  },
+  "dependencies": {
+    "nanoid": "^4.0.0",
+    "classnames": "^2.3.1",
+    "next": "^12.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "replicache": ">=11.2.1",
+    "replicache-nextjs": "^0.4.0",
+    "replicache-react": "^2.9.0",
+    "todomvc-app-css": "^2.4.2",
+    "replicache-quickstarts-shared": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "@types/react": "^17.0.11",
+    "typescript": "^4.7.4",
+    "@rocicorp/eslint-config": "^0.1.2",
+    "@rocicorp/prettier-config": "^0.1.1",
+    "next-transpile-modules": "^9.0.0"
+  },
+  "eslintConfig": {
+    "extends": "@rocicorp/eslint-config"
+  },
+  "prettier": "@rocicorp/prettier-config"
+}
