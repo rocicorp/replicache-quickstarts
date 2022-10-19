@@ -30,7 +30,7 @@ $ npm install; npm run build;
 #### [react](/react)
 
 ```bash
-$ npm run watch --ws
+$ npm run watch --ws react
 ```
 
 Provides an example integrating replicache with react in a simple todo application.
@@ -40,7 +40,7 @@ Provides an example integrating replicache with react in a simple todo applicati
 Provides an example integrating replicache with vanilla typescript in a simple todo application. This library utilizes W3C standard web-components. It does not have any requirements to run any external library frameworks.
 
 ```bash
-$ npm run watch --ws
+$ npm run watch --ws ts-web-component
 ```
 
 #### [nextjs](/nextjs)
@@ -48,7 +48,7 @@ $ npm run watch --ws
 Provides an example integrating replicache with react and Next.js in a simple todo application.
 
 ```bash
-$ npm run dev --ws
+$ npm run dev --ws nextjs
 ```
 
 ## Production mode
@@ -56,7 +56,7 @@ $ npm run dev --ws
 The server can serve the output of the various frameworks and be run as a static server to simulate a production environment.
 
 ```bash
-$ npm run prod --ws
+$ npm run prod --ws <framework>
 ```
 
 ## Deploying to Render

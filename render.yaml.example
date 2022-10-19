@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: replicache-quickstarts-todo-<framework> # change e.g. (replicache-quickstarts-todo-react)
+    name: replicache-quickstarts-todo
     env: node
     region: oregon # optional (defaults to oregon)
     plan: starter # optional (defaults to starter)
@@ -13,4 +13,10 @@ services:
       - key: NODE_VERSION
         value: 16.15.1
       - key: DATABASE_URL
-        value: <database uri> # e.g. postgres://postgres:postgres@localhost:5432/postgres
+        fromDatabase:
+          name: replicache-todo
+          property: connectionString
+
+databases:
+  - name: replicache-todo
+    databaseName: db

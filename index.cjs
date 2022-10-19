@@ -78,7 +78,10 @@ function copyQuickstarts() {
       force: true,
     });
   }
-
+  renameRender = path.join(replicacheQuickstartsDest, 'render.yaml.example');
+  renameNpmIgnore = path.join(replicacheQuickstartsDest, '.npmignore');
+  fs.renameSync(renameRender, path.join(replicacheQuickstartsDest, 'render.yaml'));
+  fs.renameSync(renameNpmIgnore, path.join(replicacheQuickstartsDest, '.gitignore'));
 
   //write package.json
   const packageJson = {
