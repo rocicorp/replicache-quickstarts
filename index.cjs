@@ -50,7 +50,7 @@ function isValidPackageName(projectName) {
 function copyQuickstarts() {
   fs.cpSync(__dirname, replicacheQuickstartsDest, { recursive: true });
   console.log(`Created ${replicacheQuickstartsDest}`);
-  console.log(`See the docs for more details on setting up your project at https://doc.replicache.dev`);
+  console.log(`See the docs to finish setting up your project: https://doc.replicache.dev`);
   const deleteClientsList = availableClientsFolders.filter(
     dirent => dirent.name !== type,
   );
