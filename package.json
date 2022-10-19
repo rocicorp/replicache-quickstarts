@@ -1,6 +1,6 @@
 {
   "name": "create-replicache-app",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "devDependencies": {
     "@rocicorp/eslint-config": "^0.1.2",
     "@rocicorp/prettier-config": "^0.1.1",
@@ -11,6 +11,7 @@
   },
   "files": [
     ".gitignore",
+    "render.yaml.example",
     "client/*",
     "server",
     "shared"
