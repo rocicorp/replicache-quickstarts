@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const cwd = process.cwd();
 const os = require('os');
+const spawn = require('cross-spawn');
+const readline = require('readline');
 
 if (process.argv.length !== 4) {
   console.log('Usages: npm create replicache-app -- <projectName> <type>');
@@ -119,10 +121,32 @@ function copyQuickstarts() {
     path.join(replicacheQuickstartsDest, 'package.json'),
     JSON.stringify(packageJson, null, 2) + os.EOL
   )
+
+}
+
+function createLicense() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  rl.question(
+    'Do you want to create a Replicache license? (y/n) ',
+    (answer) => {
+      rl.close();
+      if (answer === 'y') {
+        spawn.sync('npx', ['replicache', 'get-license'], {
+          stdio: 'inherit'
+        });
+      }
+    },
+  );
 }
 
 try {
   copyQuickstarts();
+  createLicense();
+
 } catch (err) {
   console.error(err);
   process.exit(1);

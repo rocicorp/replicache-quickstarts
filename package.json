@@ -1,6 +1,9 @@
 {
   "name": "create-replicache-app",
-  "version": "0.1.11",
+  "version": "0.2.0",
+  "dependencies": {
+    "cross-spawn": "^6.0.5"
+  },
   "devDependencies": {
     "@rocicorp/eslint-config": "^0.1.2",
     "@rocicorp/prettier-config": "^0.1.1",
