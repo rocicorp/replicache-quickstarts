@@ -12,11 +12,10 @@ This repository contains quickstarts and sample code for [Replicache](https://re
 $ npx replicache get-license
 ```
 
-#### Set your `VITE_REPLICACHE_LICENSE_KEY` or `NEXT_PUBLIC_REPLICACHE_LICENSE_KEY` environment variable
+#### Set your `VITE_REPLICACHE_LICENSE_KEY` environment variable
 
 ```bash
 $ export VITE_REPLICACHE_LICENSE_KEY="<your license key>"
-$ export NEXT_PUBLIC_REPLICACHE_LICENSE_KEY="<your license key>"
 ```
 
 #### Install and Build
@@ -41,14 +40,6 @@ Provides an example integrating replicache with vanilla typescript in a simple t
 
 ```bash
 $ npm run watch --ws ts-web-component
-```
-
-#### [nextjs](/nextjs)
-
-Provides an example integrating replicache with react and Next.js in a simple todo application.
-
-```bash
-$ npm run dev --ws nextjs
 ```
 
 ## Production mode
