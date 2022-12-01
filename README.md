@@ -187,8 +187,8 @@ curl -X GET "https://api.cloudflare.com/client/v4/accounts/:accountid/workers/du
 
 ### How to run different code for mutation on server
   
-You can create in `mutators.ts` a global that indicates which environment the file is running in, and then set that variable from worker/index.ts. Commit bf7cb374b9e82b311659fcab704b65a66e0739a1 shows an example.
+You can create in `mutators.ts` a global that indicates which environment the file is running in, and then set that variable from worker/index.ts. Commit [bf7cb374b9e82b311659fcab704b65a66e0739a1](https://github.com/rocicorp/reflect-todo/commit/bf7cb374b9e82b311659fcab704b65a66e0739a1) shows an example.
   
 ### How to know when a mutator has run on the server
   
-Using above, you can store state in the client view that tracks whether a given mutator has run on client-side or server. Commit e488892dd69b828b1b9ab253f06a42628d25831d shows an example of this.
+Using above, you can store state in the client view that tracks whether a given mutator has run on client-side or server. Commit [e488892dd69b828b1b9ab253f06a42628d25831d](https://github.com/rocicorp/reflect-todo/commit/e488892dd69b828b1b9ab253f06a42628d25831d) shows an example of this.
