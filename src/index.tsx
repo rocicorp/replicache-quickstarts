@@ -8,7 +8,9 @@ import { nanoid } from "nanoid";
 
 const userID = nanoid();
 const roomID = "s1";
-const socketOrigin = "wss://reflect-todo.replicache.workers.dev";
+const socketOrigin =
+  import.meta.env.VITE_WORKER_URL ??
+  "wss://reflect-todo.replicache.workers.dev";
 
 const r = new Reflect({
   socketOrigin,
