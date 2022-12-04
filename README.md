@@ -26,7 +26,7 @@ $ npm install; npm run build;
 
 ## 2. Decide on a framework and start frontend and backend watcher
 
-#### [react](/react)
+#### [react](./client/react/)
 
 ```bash
 $ npm run watch --ws react
@@ -34,7 +34,7 @@ $ npm run watch --ws react
 
 Provides an example integrating replicache with react in a simple todo application.
 
-#### [ts-web-component](/ts-web-component)
+#### [ts-web-component](./client/ts-web-component)
 
 Provides an example integrating replicache with vanilla typescript in a simple todo application. This library utilizes W3C standard web-components. It does not have any requirements to run any external library frameworks.
 
