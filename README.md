@@ -18,7 +18,7 @@ npx wrangler secret put REFLECT_AUTH_API_KEY
 npm run dev-worker
 
 # pick a new, random roomID, eg:
-VITE_ROOM_ID=$(head -c 10 /dev/random| md5| head -c 6)
+VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
 echo VITE_ROOM_ID=$VITE_ROOM_ID
 
 # create the new room
@@ -32,6 +32,8 @@ VITE_ROOM_ID=<value from above> \
   VITE_WORKER_URL=ws://127.0.0.1:8787 \
   npm run dev
 ```
+
+If you would prefer not to re-create a room each time you run `dev-worker` you can pass it `--local --persist` and it will run the worker on your computer and save the data locally.
 
 ## Publishing Worker to Cloudflare
 
@@ -49,7 +51,7 @@ npx wrangler secret put REFLECT_AUTH_API_KEY
 npx wrangler publish
 
 # pick a new, random roomID, eg:
-VITE_ROOM_ID=$(head -c 10 /dev/random| md5| head -c 6)
+VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
 echo VITE_ROOM_ID=$VITE_ROOM_ID
 
 # create the new room
@@ -96,99 +98,11 @@ export type UserData = ReadonlyJSONObject & { userID: string };
 
 ### Auth Revalidation
 
-You can invalidate specific users or rooms using the Server Auth API, below.
+You can invalidate specific users or rooms using the [Server Auth API](doc/server-api.md#auth-api).
 
-## Server Auth API
+## Server API
 
-The server has an HTTP API for authentication tasks.
-
-### Auth API Key
-
-All calls to the Auth API must provide an API Key. Configure the API Key using Wrangler:
-
-```bash
-npx wrangler secret put REFLECT_AUTH_API_KEY
-```
-
-Then pass the API Key in each request to the Auth API using the `x-reflect-auth-api-key` HTTP header:
-
-```ts
-fetch("https://myapp.workers.dev/api/auth/v0/invalidateForUser", {
-  headers: {
-    "x-reflect-auth-api-key": "redacted",
-  },
-  body: JSON.stringify({ userID: "redacted" }),
-});
-```
-
-### `invalidateForUser`
-
-Invalidates all of a user's sessions. Affected active clients will immediately try to re-connect and auth.
-
-<table>
-     <tr>
-          <th align="left">Method</th>
-          <td><code>POST</code></td>
-     </tr>
-     <tr>
-          <th align="left">URL</th>
-          <td><code>https://myapp.workers.dev/api/auth/v0/invalidateForUser</code></td>
-     </tr>
-     <tr>
-          <th align="left">Headers</th>
-          <td><code>x-reflect-auth-api-key: string</code></td>
-     </tr>
-     <tr>
-          <th align="left">Body</th>
-          <td><code>{ userID: string }</code></td>
-     </tr>
-</table>
-
-### `invalidateForRoom`
-
-Invalidates all user sessions in a room. Affected active clients will immediately try to re-connect and auth.
-
-<table>
-     <tr>
-          <th align="left">Method</th>
-          <td><code>POST<code></td>
-     </tr>
-     <tr>
-          <th align="left">URL</th>
-          <td><code>https://myapp.workers.dev/api/auth/v0/invalidateForRoom</code></td>
-     </tr>
-     <tr>
-          <th align="left">Headers</th>
-          <td><code>x-reflect-auth-api-key: string</code></td>
-     </tr>
-     <tr>
-          <th align="left">Body</th>
-          <td><code>{ roomID: string }</code></td>
-     </tr>
-</table>
-
-### `invalidateAll`
-
-Invalidates all user sessions in all rooms. Affected active clients will immediately try to re-connect and auth.
-
-<table>
-     <tr>
-          <th align="left">Method</th>
-          <td><code>POST<code></td>
-     </tr>
-     <tr>
-          <th align="left">URL</th>
-          <td><code>https://myapp.workers.dev/api/auth/v0/invalidateAll</code></td>
-     </tr>
-     <tr>
-          <th align="left">Headers</th>
-          <td><code>x-reflect-auth-api-key: string</code></td>
-     </tr>
-     <tr>
-          <th align="left">Body</th>
-          <td>N/A</td>
-     </tr>
-</table>
+The server's Room Management and Auth API are documented in [Server API](doc/server-api.md) doc.
 
 ## Recipes
 
@@ -226,3 +140,7 @@ You can create in `mutators.ts` a global that indicates which environment the fi
 ### How to know when a mutator has run on the server
 
 Using above, you can store state in the client view that tracks whether a given mutator has run on client-side or server. Commit [e488892dd69b828b1b9ab253f06a42628d25831d](https://github.com/rocicorp/reflect-todo/commit/e488892dd69b828b1b9ab253f06a42628d25831d) shows an example of this.
+
+### How to migrate to `v0.19.x`
+
+Action is required to upgrade to Reflect Server version `0.19.x` from an earlier version. See the [Migration Guide](doc/migration.md).
