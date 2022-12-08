@@ -9,11 +9,28 @@ The `dev-worker` command runs the worker using [wrangler](https://developers.clo
 ```bash
 npm install
 
+# generate a shared secret enabling Reflect Server to authenticate
+# administrative calls, e.g. to create a new room. Configure
+# Reflect Server with the key via wranlger:
+npx wrangler secret put REFLECT_AUTH_API_KEY
+
 # start the backend
 npm run dev-worker
 
-# (in another shell) start the frontend
-VITE_WORKER_URL=ws://localhost:8787 npm run dev
+# pick a new, random roomID, eg:
+VITE_ROOM_ID=$(head -c 10 /dev/random| md5| head -c 6)
+echo VITE_ROOM_ID=$VITE_ROOM_ID
+
+# create the new room
+curl -X POST 'http://127.0.0.1:8787/createRoom' \
+  -H 'x-reflect-auth-api-key: <Auth API key chosen above>' \
+  -H 'Content-type: application/json' \
+  -d "{ \"roomID\": \"$VITE_ROOM_ID\" }"
+
+# (in a separate shell) start the frontend
+VITE_ROOM_ID=<value from above> \
+  VITE_WORKER_URL=ws://127.0.0.1:8787 \
+  npm run dev
 ```
 
 ## Publishing Worker to Cloudflare
@@ -23,11 +40,28 @@ First, get an account at Cloudflare: https://workers.cloudflare.com/.
 Then:
 
 ```bash
+# generate a shared secret enabling Reflect Server to authenticate
+# administrative calls, e.g. to create a new room. Configure
+# Reflect Server with the key via wranlger:
+npx wrangler secret put REFLECT_AUTH_API_KEY
+
 # publish to Cloudflare
 npx wrangler publish
 
+# pick a new, random roomID, eg:
+VITE_ROOM_ID=$(head -c 10 /dev/random| md5| head -c 6)
+echo VITE_ROOM_ID=$VITE_ROOM_ID
+
+# create the new room
+curl -X POST 'http://<host from publish command>/createRoom' \
+  -H 'x-reflect-auth-api-key: <Auth API key chosen above>' \
+  -H 'Content-type: application/json' \
+  -d "{ \"roomID\": \"$VITE_ROOM_ID\" }"
+
 # run frontend
-VITE_WORKER_URL=wss://<host from previous command> npm run dev
+VITE_ROOM_ID=<value from above> \
+  VITE_WORKER_URL=wss://<host from publish command> \
+  npm run dev
 ```
 
 ## Authentication and Authorization
@@ -186,9 +220,9 @@ curl -X GET "https://api.cloudflare.com/client/v4/accounts/:accountid/workers/du
 ```
 
 ### How to run different code for mutation on server
-  
+
 You can create in `mutators.ts` a global that indicates which environment the file is running in, and then set that variable from worker/index.ts. Commit [bf7cb374b9e82b311659fcab704b65a66e0739a1](https://github.com/rocicorp/reflect-todo/commit/bf7cb374b9e82b311659fcab704b65a66e0739a1) shows an example.
-  
+
 ### How to know when a mutator has run on the server
-  
+
 Using above, you can store state in the client view that tracks whether a given mutator has run on client-side or server. Commit [e488892dd69b828b1b9ab253f06a42628d25831d](https://github.com/rocicorp/reflect-todo/commit/e488892dd69b828b1b9ab253f06a42628d25831d) shows an example of this.
