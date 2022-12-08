@@ -33,6 +33,8 @@ VITE_ROOM_ID=<value from above> \
   npm run dev
 ```
 
+If you would prefer not to re-create a room each time you run `dev-worker` you can pass it `--local --persist` and it will run the worker on your computer and save the data locally.
+
 ## Publishing Worker to Cloudflare
 
 First, get an account at Cloudflare: https://workers.cloudflare.com/.
