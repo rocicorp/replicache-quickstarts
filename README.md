@@ -18,7 +18,7 @@ npx wrangler secret put REFLECT_AUTH_API_KEY
 npm run dev-worker
 
 # pick a new, random roomID, eg:
-VITE_ROOM_ID=$(head -c 10 /dev/random| md5| head -c 6)
+VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
 echo VITE_ROOM_ID=$VITE_ROOM_ID
 
 # create the new room
@@ -51,7 +51,7 @@ npx wrangler secret put REFLECT_AUTH_API_KEY
 npx wrangler publish
 
 # pick a new, random roomID, eg:
-VITE_ROOM_ID=$(head -c 10 /dev/random| md5| head -c 6)
+VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
 echo VITE_ROOM_ID=$VITE_ROOM_ID
 
 # create the new room
