@@ -16,11 +16,13 @@ npm install
 npx wrangler secret put REFLECT_AUTH_API_KEY
 
 # start the backend
-npm run dev-worker -- --persist
+# data will be stored in memory, so when the server restarts, data is gone
+npm run dev-worker
 
 # (in a separate shell)
 # start the frontend
 
+# must be done each time you restart your server
 # pick a new, random roomID
 export VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
 echo VITE_ROOM_ID=$VITE_ROOM_ID
