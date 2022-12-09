@@ -20,7 +20,8 @@ The new room record introduced in `0.19.x` keeps the `roomID => objectID` mappin
 
 ## Suggested migration strategy
 
-1. Prepare a new version of your server such that it calls [createRoom](server-api.md#create-room) to explicitly create a room before it is used. You can use [Get room status](server-api.md#get-room-status) as a non-transactional check on room existence prior to the call if you wish.
+1. Ensure that you're providing an [Auth API Token](server-api.md#authentication) to Reflect Server and that this shared secret is available in your application server to pass in the `createRoom` HTTP request.
+1. Prepare a new version of your app server such that it calls [createRoom](server-api.md#create-room) to explicitly create a room before it is used. You can use [Get room status](server-api.md#get-room-status) as a non-transactional check on room existence prior to the call if you wish.
 2. Prepare a mechanism (e.g., a script, or an endpoint in your server) that enumerates your `roomID`s and invokes [Migrate room](server-api.md#migrate-room) for each `roomID`. You can optionally check that a record was properly migrated using the [Get room status](server-api.md#get-room-status) call and verifying that it has status `"open"`.
 3. Update Reflect Server to `0.19.x`, build, and push the new version (`wrangler publish`).
 4. Deploy the new version of your server.
