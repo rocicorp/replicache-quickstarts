@@ -9,16 +9,20 @@ The `dev-worker` command runs the worker using [wrangler](https://developers.clo
 ```bash
 npm install
 
+# (only need to do once per-project)
 # generate a shared secret enabling Reflect Server to authenticate
 # administrative calls, e.g. to create a new room. Configure
 # Reflect Server with the key via wranlger:
 npx wrangler secret put REFLECT_AUTH_API_KEY
 
 # start the backend
-npm run dev-worker
+npm run dev-worker -- --persist
 
-# pick a new, random roomID, eg:
-VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
+# (in a separate shell)
+# start the frontend
+
+# pick a new, random roomID
+export VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
 echo VITE_ROOM_ID=$VITE_ROOM_ID
 
 # create the new room
@@ -27,10 +31,7 @@ curl -X POST 'http://127.0.0.1:8787/createRoom' \
   -H 'Content-type: application/json' \
   -d "{ \"roomID\": \"$VITE_ROOM_ID\" }"
 
-# (in a separate shell) start the frontend
-VITE_ROOM_ID=<value from above> \
-  VITE_WORKER_URL=ws://127.0.0.1:8787 \
-  npm run dev
+VITE_WORKER_URL=ws://127.0.0.1:8787 npm run dev
 ```
 
 If you would prefer not to re-create a room each time you run `dev-worker` you can pass it `--local --persist` and it will run the worker on your computer and save the data locally.
