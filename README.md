@@ -1,10 +1,12 @@
 # reflect-todo
 
-This is a demo of an upcoming Replicache-as-a-service we are building.
+This is a demo of Reflect: an upcoming Replicache-as-a-service product we are building.
 
-Currently the way you run this is "on-prem": you get yourself a Cloudflare account and upload the backend to your cloudflare account.
+The idea of Reflect is that you can get all the benefits of [Replicache](https://replicache.dev/) without having to build your own backend. Think of it like Firebase, but with multiplayer and offline support that actually works 😂.
 
-You don't have to know much/anything about the backend. It's more or less a black box. And in the future, you won't have to run a backend at all, we will do that as a service that you manage via a CLI.
+Currently the way you run this demo is "on-prem": you get yourself a Cloudflare account and upload the backend (which is inside this repo) to your Cloudflare account.
+
+You don't have to know much/anything about how the backend works. It's a black box. And in the future, you won't have to run a backend at all, we will do that as a service that you manage via a CLI. Running it yourself just a temporary thing.
 
 ## Hacking Locally
 
