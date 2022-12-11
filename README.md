@@ -8,6 +8,12 @@ Currently the way you run this demo is "on-prem": you get yourself a Cloudflare 
 
 You don't have to know much/anything about how the backend works. It's a black box. And in the future, you won't have to run a backend at all, we will do that as a service that you manage via a CLI. Running it yourself just a temporary thing.
 
+See also https://github.com/rocicorp/replidraw-do, a fancier drawing demo.
+
+# Demo
+
+Running live at https://reflect-todo.vercel.app/.
+
 ## Hacking Locally
 
 The `dev-worker` command runs the worker using [wrangler](https://developers.cloudflare.com/workers/wrangler/).
