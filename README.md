@@ -2,7 +2,7 @@
 
 This is a demo of Reflect: an upcoming Replicache-as-a-service product we are building.
 
-The idea of Reflect is that you can get all the benefits of [Replicache](https://replicache.dev/) without having to build your own backend. Think of it like Firebase, but with multiplayer and offline support that actually works 😂.
+The idea of Reflect is that you can get all the benefits of [Replicache](https://replicache.dev/) without having to build your own backend. Think of it like Firebase, but with multiplayer and offline support that works 😂.
 
 Currently the way you run this demo is "on-prem": you get yourself a Cloudflare account and upload the backend (which is inside this repo) to your Cloudflare account.
 
