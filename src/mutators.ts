@@ -45,10 +45,10 @@ export const mutators = {
   // the UI to reflect the changes.
   createTodo: async (tx: WriteTransaction, todo: Omit<Todo, "sort">) => {
     const todos = await listTodos(tx);
-    todos.sort((t1, t2) => t1.sort - t2.sort);
-
-    const maxSort = todos.pop()?.sort ?? 0;
-    const newTodo: Todo = { ...todo, sort: maxSort + 1 };
+    for (const t of todos) {
+      await deleteTodo(tx, t.id);
+    }
+    const newTodo: Todo = { ...todo, sort: 0 };
     await putTodo(tx, newTodo);
   },
 

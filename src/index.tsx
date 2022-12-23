@@ -1,7 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./app";
 import { mutators } from "./mutators";
 import { Reflect } from "@rocicorp/reflect";
 import { nanoid } from "nanoid";
@@ -23,12 +20,18 @@ const r = new Reflect({
   mutators,
 });
 
-// Workaround for https://github.com/rocicorp/reflect-server/issues/146.
-// We don't receive initial data until first mutation after connection.
-void r.mutate.init();
+async function foo() {
+  await r.mutate.createTodo({
+    text: "remember the milk",
+    completed: false,
+    id: nanoid(),
+  });
+  await r.mutate.init();
+  r.subscribe(async (tx) => await tx.scan().toArray(), {
+    onData: (data) => {
+      console.log(data);
+    },
+  });
+}
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <App reflect={r} />
-  </React.StrictMode>
-);
+void foo();
