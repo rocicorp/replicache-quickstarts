@@ -24,7 +24,7 @@ npm install
 # (only need to do once per-project)
 # generate a shared secret enabling Reflect Server to authenticate
 # administrative calls, e.g. to create a new room. Configure
-# Reflect Server with the key via wranlger:
+# Reflect Server with the key via wrangler:
 npx wrangler secret put REFLECT_AUTH_API_KEY
 
 # start the backend
@@ -59,7 +59,7 @@ Then:
 ```bash
 # generate a shared secret enabling Reflect Server to authenticate
 # administrative calls, e.g. to create a new room. Configure
-# Reflect Server with the key via wranlger:
+# Reflect Server with the key via wrangler:
 npx wrangler secret put REFLECT_AUTH_API_KEY
 
 # publish to Cloudflare
