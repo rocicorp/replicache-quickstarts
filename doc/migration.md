@@ -27,7 +27,7 @@ The new room record introduced in `0.19.x` keeps the `roomID => objectID` mappin
 4. Deploy the new version of your server.
 5. Invoke the migration mechanism prepared three steps above.
 
-Steps 3-5 should be done in succession. The behavior of clients in the time between deploying the new Reflect Server version and the migration completing is that a client won't be able to connect to an unmigrated room. Once a room is migrated, the client will automatically reconnect.
+Steps 4-6 should be done in succession. The behavior of clients in the time between deploying the new Reflect Server version and the migration completing is that a client won't be able to connect to an unmigrated room. Once a room is migrated, the client will automatically reconnect.
 
 ## To support GDPR
 
