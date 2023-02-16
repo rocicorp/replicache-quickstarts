@@ -3,7 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./app";
 import { mutators } from "./mutators";
-import { Reflect } from "@rocicorp/reflect";
+import {
+  consoleLogSink,
+  DatadogClientLogSink,
+  Reflect,
+} from "@rocicorp/reflect";
 import { nanoid } from "nanoid";
 
 const userID = nanoid();
@@ -15,12 +19,23 @@ const socketOrigin =
   import.meta.env.VITE_WORKER_URL ??
   "wss://reflect-todo.replicache.workers.dev";
 
+const logSinks = [consoleLogSink];
+if (import.meta.env.VITE_DATADOG_CLIENT_TOKEN) {
+  logSinks.push(
+    new DatadogClientLogSink({
+      clientToken: import.meta.env.VITE_DATADOG_CLIENT_TOKEN,
+      service: "replidraw-do",
+    })
+  );
+}
+
 const r = new Reflect({
   socketOrigin,
   userID,
   roomID,
   auth: userID,
   mutators,
+  logSinks,
 });
 
 // Workaround for https://github.com/rocicorp/reflect-server/issues/146.
