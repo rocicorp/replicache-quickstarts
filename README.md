@@ -60,16 +60,7 @@ If you would prefer not to re-create a room each time you run `dev-worker` you c
 
 ## Publishing Worker to Cloudflare
 
-First, get an account at Cloudflare: https://workers.cloudflare.com/.
-
-Then:
-
 ```bash
-# generate a shared secret enabling Reflect Server to authenticate
-# administrative calls, e.g. to create a new room. Configure
-# Reflect Server with the key via wrangler:
-npx wrangler secret put REFLECT_AUTH_API_KEY
-
 # publish to Cloudflare
 npx wrangler publish
 
