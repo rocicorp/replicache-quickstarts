@@ -6,7 +6,7 @@ The idea of Reflect is that you can get all the benefits of [Replicache](https:/
 
 Currently the way you run this demo is "on-prem": you get yourself a Cloudflare account and upload the backend (which is inside this repo) to your Cloudflare account.
 
-You don't have to know much/anything about how the backend works. It's a black box. And in the future, you won't have to run a backend at all, we will do that as a service that you manage via a CLI. Running it yourself just a temporary thing.
+You don't have to know much/anything about how the backend works. It's a black box. In the future, we will also offer the backend as a service.
 
 See also https://github.com/rocicorp/replidraw-do, a fancier drawing demo.
 
@@ -14,9 +14,11 @@ See also https://github.com/rocicorp/replidraw-do, a fancier drawing demo.
 
 Running live at https://reflect-todo.vercel.app/.
 
-## Hacking Locally
+## Building Your Own Thing
 
-The `dev-worker` command runs the worker using [wrangler](https://developers.cloudflare.com/workers/wrangler/).
+First, get an account at Cloudflare: https://workers.cloudflare.com/.
+
+Then:
 
 ```bash
 npm install
@@ -40,6 +42,12 @@ export VITE_ROOM_ID=$(head -c 10 /dev/random | md5 | head -c 6)
 echo VITE_ROOM_ID=$VITE_ROOM_ID
 
 # create the new room
+# Note: The first time you do this, you'll get an error that the Durable Object binding is unavailable.
+# You need to navigate to enable Durable Objects:
+# 1. Navigate to: https://dash.cloudflare.com/
+# 2. Pick "workers" from left nav and select your worker
+# 3. In your Worker, scroll down to Durable Objects. Click Learn more > View Paid Plan.
+# 4. Select Purchase Workers Paid and complete the payment process to enable Durable Objects.
 curl -X POST 'http://127.0.0.1:8787/createRoom' \
   -H 'x-reflect-auth-api-key: <Auth API key chosen above>' \
   -H 'Content-type: application/json' \
