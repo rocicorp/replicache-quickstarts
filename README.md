@@ -78,6 +78,8 @@ curl -X POST 'http://<host from publish command>/createRoom' \
 VITE_ROOM_ID=<value from above> \
   VITE_WORKER_URL=wss://<host from publish command> \
   npm run dev
+
+VITE_WORKER_URL=wss://<host from publish command> npm run dev
 ```
 
 ## Offline Support
