@@ -4,9 +4,8 @@ import "./index.css";
 import App from "./app";
 import { mutators } from "./mutators";
 import { Reflect } from "@rocicorp/reflect";
-import { nanoid } from "nanoid";
 
-const userID = nanoid();
+const userID = "reflect-user";
 const roomID: string | undefined = import.meta.env.VITE_ROOM_ID;
 if (roomID === undefined || roomID === "") {
   throw new Error("VITE_ROOM_ID required");
@@ -19,9 +18,16 @@ const r = new Reflect({
   socketOrigin,
   userID,
   roomID,
-  auth: userID,
   mutators,
+  auth: () => {
+    console.log("auth callback");
+    return userID;
+  },
 });
+
+r.onOnlineChange = (onlineParam) => {
+  console.log("online", r.online, onlineParam);
+};
 
 // Workaround for https://github.com/rocicorp/reflect-server/issues/146.
 // We don't receive initial data until first mutation after connection.

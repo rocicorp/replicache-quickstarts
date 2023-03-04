@@ -82,17 +82,6 @@ VITE_ROOM_ID=<value from above> \
 VITE_WORKER_URL=wss://<host from publish command> npm run dev
 ```
 
-## Offline Support
-
-Currently offline support is degraded for Reflect. Here is what works:
-
-* You can go offline and make changes. If you keep the tab open, when you come back, changes will sync correctly.
-* If you make changes while offline and close the tab, those changes are lost forever 😢.
-* While offline, if you have two tabs open, you won't see changes propagate between them.
-
-We are working on this and expect it to be fixed very soon (like this year or early next year at latest).
-
-
 ## Authentication and Authorization
 
 Reflect can optionally authenticate users who connect to rooms with your server and authorize their access to the room.
