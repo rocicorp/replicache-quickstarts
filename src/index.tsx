@@ -23,6 +23,7 @@ const r = new Reflect({
     console.log("auth callback");
     return userID;
   },
+  metricsIntervalMs: 5000,
 });
 
 r.onOnlineChange = (onlineParam) => {
